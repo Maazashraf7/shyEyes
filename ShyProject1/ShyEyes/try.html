@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Chatbot</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f0f2f5;
+    }
+
+    /* Floating Chat Button */
+    .chat-toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #ff4081;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        z-index: 1000;
+    }
+
+    /* Chat Window */
+    .chatbot-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 300px;
+        height: 400px;
+        background: #fff;
+        border-radius: 10px;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .chat-header {
+        background: #ff4081;
+        color: #fff;
+        padding: 12px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .chat-messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background: #fafafa;
+    }
+
+    .message {
+        margin: 8px 0;
+        padding: 8px 12px;
+        border-radius: 6px;
+        max-width: 80%;
+        line-height: 1.4;
+    }
+
+    .bot-message {
+        background: #f1c6d5;
+        align-self: flex-start;
+    }
+
+    .user-message {
+        background: #c6e4f1;
+        align-self: flex-end;
+    }
+
+    .chat-input-area {
+        display: flex;
+        border-top: 1px solid #ccc;
+    }
+
+    .chat-input {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        outline: none;
+    }
+
+    .send-btn {
+        background: #ff4081;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<!-- Floating Button -->
+<button class="chat-toggle-btn" id="chatToggleBtn">💬</button>
+
+<!-- Chatbot -->
+<div class="chatbot-container" id="chatbot">
+    <div class="chat-header">Chat with Us</div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">Hello! How can I help you today?</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Type your message...">
+        <button class="send-btn" id="sendBtn">Send</button>
+    </div>
+</div>
+
+<script>
+    const chatToggleBtn = document.getElementById("chatToggleBtn");
+    const chatbot = document.getElementById("chatbot");
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    // Open/Close Chat
+    chatToggleBtn.addEventListener("click", () => {
+        chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+    });
+
+    // Send Message
+    function sendMessage() {
+        const userText = chatInput.value.trim();
+        if (userText === "") return;
+
+        // Add user message
+        const userMsg = document.createElement("div");
+        userMsg.classList.add("message", "user-message");
+        userMsg.textContent = userText;
+        chatMessages.appendChild(userMsg);
+
+        chatInput.value = "";
+
+        // Simulate bot response
+        setTimeout(() => {
+            const botMsg = document.createElement("div");
+            botMsg.classList.add("message", "bot-message");
+            botMsg.textContent = "You said: " + userText;
+            chatMessages.appendChild(botMsg);
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 600);
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendMessage();
+    });
+</script>
+
+</body>
+</html>

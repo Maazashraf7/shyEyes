@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- x-icon -->
+  <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- for subscription -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- add button script link -->
+
+
+  <!-- for subscription 
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+close link button script -->
+
+
+  <!-- Other css -->
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/icofont.min.css">
+  <link rel="stylesheet" href="assets/css/swiper.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <title>SHY-EYES – Profile | Find Your Perfect Match</title>
+
+
+  <style>
+    .carousel-container {
+      overflow: hidden;
+      width: 100%;
+    }
+
+
+    .profile-section {
+      padding: 60px 20px;
+      background: #fffdfd;
+    }
+
+
+
+    .chat-btn i {
+      font-size: 18px;
+      color: white;
+    }
+
+
+    .card-container {
+      display: flex;
+      flex-wrap: nowrap;
+      /* wrapping off */
+      gap: 25px;
+      transition: transform 0.5s ease;
+    }
+
+
+    .user-card {
+      flex: 0 0 290px;
+      /* fixed width for smooth slide */
+      background: rgb(253, 243, 243) !important;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+
+    .user-card:hover {
+      transform: translateY(-5px);
+    }
+
+
+    .user-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .user-image:hover .hover-overlay {
+      opacity: 1;
+    }
+
+
+
+    .user-image img {
+      width: 90%;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+
+    .hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 90%;
+      border-radius: 50%;
+      background: rgba(59, 58, 58, 0.5);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .user-image:hover .hover-overlay {
+      opacity: 1;
+    }
+
+
+    .hover-overlay .more-link {
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+
+    .hover-overlay span {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .user-info {
+      text-align: center;
+      padding: 15px;
+    }
+
+    .user-info h4 {
+      margin: 10px 0 5px;
+      color: #f39c12;
+    }
+
+    .user-info p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .btn-group {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chat-btn {
+      padding: 8px 12px;
+      background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .chat-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .dot {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .online {
+      background-color: #08a608;
+      animation: blink 1s infinite;
+    }
+
+    .offline {
+      background-color: gray;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* add more style */
+
+    .hover-overlay .more-link {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .hover-overlay .more-link:hover {
+      color: #ffcc00;
+    }
+
+
+
+
+
+    /* .send-btn {
+      position: relative;
+     background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 14px;
+      overflow: hidden;
+    } */
+
+
+    .send-btn {
+      background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .send-btn.sent {
+      background-color: gray;
+    }
+
+
+    .cancel-request {
+      background-color: rgb(232, 123, 123) !important;
+    }
+
+    .cancel-request:hover {
+      background-color: #666 !important;
+    }
+
+    /* .popup {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #28a745;
+      color: white;
+      width: 250px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 9999;
+    }
+
+    .popup.show {
+      opacity: 1;
+      pointer-events: auto;
+    } */
+
+    .navbar-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .profile-pic-wrapper {
+      position: relative;
+      width: 35px;
+      height: 35px;
+    }
+
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Profile Icon Image */
+    .profile-icon {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+
+    .profile-icon img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+
+    /* Green Dot */
+    .status-dot {
+      position: absolute;
+      top: 25px;
+      right: -2px;
+      width: 10px;
+      height: 10px;
+      background-color: #28a745;
+      /* green */
+      border: 1px solid white;
+      border-radius: 50%;
+    }
+
+    .user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #29004b;
+    }
+
+
+    .heart {
+      position: absolute;
+      font-size: 16px;
+      color: rgb(255, 0, 0);
+      animation: float 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+
+
+    .send-btn {
+      padding: 10px 20px;
+      background: #ec5b75;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .popup {
+      display: none;
+      background: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
+      z-index: 999;
+      font-size: 16px;
+    }
+
+
+    .heart {
+      position: absolute;
+      animation: fly 1s ease-out forwards;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    /* Arrows */
+    .arrow-btn {
+      position: absolute;
+      top: 100%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .arrow-left {
+      left: 10px;
+    }
+
+    .arrow-right {
+      right: 10px;
+    }
+
+
+
+
+    .name-container {
+      display: flex;
+      align-items: center;
+      margin-left: 40px;
+      gap: 10px;
+    }
+
+    .online-dot {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      background-color: #2dac31;
+      /* Green */
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Pulse effect */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(63, 226, 68, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+      }
+    }
+
+    .offline-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      /* naam aur dot ke beech gap */
+    }
+
+    .offline-status::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: gray;
+      /* offline ke liye gray */
+      border-radius: 50%;
+    }
+  </style>
+
+
+</head>
+
+
+<body>
+
+
+
+
+  <!-- preloader start here -->
+  <div class="preloader">
+    <div class="preloader-inner">
+      <dotlottie-wc src="https://lottie.host/8d6af0b2-23e7-46ba-a471-679685df0972/nYaMcOGKyJ.lottie"
+        style="width: 200px; height: 200px" speed="1" autoplay loop></dotlottie-wc>
+    </div>
+  </div>
+  <!-- preloader ending here -->
+
+
+
+
+  <!-- ==========Header Section Starts Here========== -->
+  <header class="header-section">
+
+
+    <div class="header-top">
+      <div class="container">
+        <div class="header-top-area">
+          <ul class="left">
+            <li>
+              <i class="icofont-ui-call"></i> <span>+00000000</span>
+            </li>
+            <li>
+              <i class="icofont-location-pin"></i> Noida, Greater Noida
+            </li>
+          </ul>
+          <ul class="social-icons d-flex align-items-center">
+            <li>
+              <p>
+                Find us on :
+              </p>
+            </li>
+            <li>
+              <a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a>
+            </li>
+            <li>
+              <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#" class="vimeo"><i class="icofont-vimeo"></i></a>
+            </li>
+            <li>
+              <a href="#" class="skype"><i class="icofont-skype"></i></a>
+            </li>
+            <li>
+              <a href="#" class="rss"><i class="icofont-rss-feed"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+        <div class="header-wrapper">
+          <div class="logo">
+            <a href="index.html">
+              <img src="assets/logo/shylogo.png" alt="logo">
+            </a>
+          </div>
+          <div class="menu-area">
+            <ul class="menu">
+              <li>
+                <a href="index2.html">Home</a>
+              </li>
+
+              <li>
+                <a href="index.html">About Us</a>
+              </li>
+
+              <li>
+                <a href="#0">Features</a>
+                <ul class="submenu">
+
+                  <li><a href="members.html">All Members</a></li>
+                  <li><a href="profile2.html">profiles</a></li>
+                  <li><a href="profile.html">Member Profile</a></li>
+
+                  <!-- <li><a href="login.html">Login</a></li>
+                                    <li><a href="signup.html">Sign Up</a></li> -->
+                  <li><a href="pricing-plan.html">Pricing Plan</a></li>
+                  <!-- <li><a href="404.html">404 Page</a></li> -->
+
+                </ul>
+              </li>
+
+
+              <li>
+                <a href="#0">Blog</a>
+                <ul class="submenu">
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="blog-single.html">Blog Single</a></li>
+                </ul>
+              </li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Profile Icon with Green Dot -->
+              <a href="createProfile.html" class="profile-icon">
+                <span class="online-dot"></span>
+              
+
+            <h2 id="displayName"></h2>
+            <img id="profileImage" alt="Profile Picture" width="100">
+            </a>
+            <!-- toggle icons -->
+            <div class="header-bar d-lg-none">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="ellepsis-bar d-lg-none">
+              <i class="icofont-info-square"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+  <!-- ==========Header Section Ends Here========== -->
+
+
+
+  <!-- ==========Page Header Section Start Here========== -->
+  <section class="page-header-section style-1 bg-pink">
+    <div class="container">
+      <div class="page-header-content">
+        <div class="page-header-inner">
+          <div class="page-title">
+            <h2>Some Matchs To Your Profile</h2>
+          </div>
+          <ol class="breadcrumb">
+            <li><a href="index2.html">Home</a></li>
+            <li class="active">Profiles</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ==========Page Header Section Ends Here========== -->
+
+
+  <!-- ==========Profile Section Start Here========== -->
+
+
+  <!-- Lottie Animation Fixed Bottom Right (Small Size) -->
+  <dotlottie-wc src="https://lottie.host/ee468a01-9f4c-4ccc-8c32-43eda3b6d49b/a94TBYW5n7.lottie" style="
+        width: 150px; 
+        height: 150px; 
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        z-index: 9999;" speed="1" autoplay loop>
+  </dotlottie-wc>
+
+
+
+
+
+  <section class="profile-section" style="margin-bottom: 20px;">
+    <div class="carousel-container">
+      <button class="arrow-btn arrow-left" style="background-color: #f3125d;">&#10094;</button>
+      <button class="arrow-btn arrow-right" style="background-color: #f3127b;">&#10095;</button>
+
+      <div class="card-container" id="carouselTrack">
+
+        <!-- Example Cards -->
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/aejaz-memon-29X9pcVHYTI-unsplash.jpg" alt="User 1">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <div class="name-container">
+              <h4>Jimmy Perez</h4>
+              <span class="online-dot"></span>
+            </div>
+            <p>23 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/alexandru-zdrobau-BGz8vO3pK8k-unsplash.jpg" alt="User 2">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <div class="name-container">
+              <h4>Vanshi Chudhary</h4>
+              <span class="online-dot"></span>
+            </div>
+            <p>21 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn"><i class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn"><i class="bi bi-camera-video-fill"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more cards here -->
+
+        <!-- Example Cards -->
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/fineas-gavre-CE_1ZBQ__Ns-unsplash.jpg" alt="User 1">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <h4 class="offline-status">Priya Singh</h4>
+            <p>23 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/ins-vikrant-VP62OlfUIos-unsplash.jpg" alt="User 2">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <div class="name-container">
+              <h4>Rashi Singh</h4>
+              <span class="online-dot"></span>
+            </div>
+            <p>21 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- Example Cards -->
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/joshua-rawson-harris-1YH0mu5Pcgs-unsplash.jpg" alt="User 1">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <h4 class="offline-status">Pyal Sharma</h4>
+            <p>23 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/mohit-mehta-ziiZmFW8yAc-unsplash.jpg" alt="User 2">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <div class="name-container">
+              <h4>Rahul Ray</h4>
+              <span class="online-dot"></span>
+            </div>
+            <p>21 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- Example Cards -->
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/aejaz-memon-29X9pcVHYTI-unsplash.jpg" alt="User 1">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <h4 class="offline-status">Vansh Chudhary</h4>
+            <p>23 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-image">
+            <img src="assets/images/story10.webp" alt="User 2">
+            <div class="hover-overlay">
+              <a href="#" class="more-link">More</a>
+            </div>
+          </div>
+          <div class="user-info">
+            <button class="send-btn" onclick="toggleRequest(this)">Send Request</button>
+            <div class="name-container">
+              <h4>Akash Singh</h4>
+              <span class="online-dot"></span>
+            </div>
+            <p>21 Years Old</p>
+            <div class="btn-group">
+              <button class="chat-btn" id="audioBtn" onclick="handleAudioClick()"><i class="fas fa-phone"></i></button>
+              <button class="chat-btn" id="chatBtn" onclick="handleChatClick()"> <i
+                  class="fas fa-comment-dots"></i></button>
+              <button class="chat-btn" id="videoBtn" onclick="handleVedioClick()"> <i
+                  class="bi bi-camera-video-fill"></i></button>
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Popup -->
+    <div id="popup" class="popup">Request Sent Successfully !</div>
+
+
+  </section>
+
+  <script>
+    const track = document.getElementById('carouselTrack');
+    const cardWidth = track.children[0].offsetWidth + 25;
+
+    function moveLeft() {
+      track.style.transition = 'transform 0.5s ease';
+      track.style.transform = `translateX(-${cardWidth}px)`;
+      setTimeout(() => {
+        track.appendChild(track.firstElementChild);
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(0)';
+      }, 500);
+    }
+
+    function moveRight() {
+      track.insertBefore(track.lastElementChild, track.firstElementChild);
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${cardWidth}px)`;
+      requestAnimationFrame(() => {
+        track.style.transition = 'transform 0.5s ease';
+        track.style.transform = 'translateX(0)';
+      });
+    }
+
+    document.querySelector('.arrow-left').addEventListener('click', moveRight);
+    document.querySelector('.arrow-right').addEventListener('click', moveLeft);
+
+    // Auto slide every 2 seconds
+    setInterval(moveLeft, 4000);
+  </script>
+
+
+
+
+
+  <script>
+    function toggleRequest(button) {
+      const isSent = button.classList.toggle("sent");
+      button.textContent = isSent ? "Cancel Request" : "Send Request";
+
+      if (isSent) {
+        // Show popup
+        const popup = document.getElementById("popup");
+        popup.style.display = "block";
+
+        // Hide after animation
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 2000);
+
+        // Create hearts
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.innerHTML = "❤️";
+
+          // Random direction
+          const angle = Math.random() * 2 * Math.PI;
+          const distance = 80 + Math.random() * 40;
+          const x = Math.cos(angle) * distance;
+          const y = Math.sin(angle) * distance;
+
+          heart.style.setProperty('--x', `${x}px`);
+          heart.style.setProperty('--y', `${y}px`);
+
+          // Position from center of button
+          const rect = button.getBoundingClientRect();
+          heart.style.left = `${rect.width / 2}px`;
+          heart.style.top = `${rect.height / 2}px`;
+
+          button.appendChild(heart);
+
+          // Remove after animation
+          setTimeout(() => heart.remove(), 1000);
+        }
+      }
+    }
+
+    function showPopup(message) {
+      const popup = document.getElementById("popup");
+      popup.innerText = message;   // message set karna
+      popup.style.display = "block"; // show karna
+
+      setTimeout(() => {
+        popup.style.display = "none"; // 3 sec baad hide
+      }, 3000);
+    }
+  </script>
+
+
+  <!-- 
+<script>
+  const track = document.getElementById('carouselTrack');
+
+  function moveCarousel() {
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = 'translateX(-25%)';
+
+    setTimeout(() => {
+      // Move first card to end for infinite loop
+      track.appendChild(track.firstElementChild);
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0)';
+    }, 500);
+  }
+
+  setInterval(moveCarousel, 2000);
+</script> -->
+
+
+
+
+  <!-- <script>
+    function sendRequest() {
+      const popup = document.getElementById('popup');
+      popup.classList.add('show');
+
+      // Hide after 2 seconds
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 2000);
+    }
+  </script> -->
+
+
+  <!-- <script>
+  function toggleRequest(button) {
+    if (button.classList.contains("requested")) {
+      // Already requested, now cancel it
+      button.textContent = "Send Request";
+      button.style.backgroundColor = "#007bff";
+      button.classList.remove("requested");
+    } else {
+      // Sending request
+      button.textContent = "Cancel Request";
+      button.style.backgroundColor = "gray";
+      button.classList.add("requested");
+    }
+  }
+</script> -->
+
+
+
+
+
+
+
+
+  <!-- 
+ <div class="payment-container">
+    <h2>Scan & Pay for <span class="plan-name" id="planName">...</span></h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=demo@upi&pn=DemoUser" alt="QR Code" class="qr-image">
+   
+    <p><strong>UPI:</strong> demo@upi<br>Use any UPI app to pay</p>
+   
+    <button class="confirm-btn" onclick="confirmPayment()">I've Paid</button>
+  </div>
+ -->
+
+
+
+  <!-- ✅ Load SweetAlert2 (UNCOMMENTED) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    function showSubscription() {
+      Swal.fire({
+        title: '🔒 Subscription Required',
+        text: 'Please subscribe to access this feature.',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Subscribe Now',
+        cancelButtonText: 'Cancel',
+        background: '#fff',
+        color: '#333',
+        confirmButtonColor: '#df314d',
+        cancelButtonColor: '#999',
+        customClass: {
+          popup: 'rounded-lg shadow-lg',
+          confirmButton: 'swal2-confirm-custom',
+          cancelButton: 'swal2-cancel-custom'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/ShyEyes/pricing-plan.html';
+        }
+      });
+    }
+
+    const selectedPlan = localStorage.getItem('selectedPlan');
+    document.getElementById("planName").textContent = selectedPlan + " Plan";
+
+    function confirmPayment() {
+      if (selectedPlan) {
+        // Store subscription in localStorage for now (in real use: update MongoDB from backend)
+        localStorage.setItem('userSubscription', selectedPlan);
+        alert("Payment successful! You now have access to " + selectedPlan + " features.");
+        // Redirect to chat or dashboard
+        window.location.href = "/ShyEyes/profile.html"; // or "/chat" if backend route is protected
+      }
+    }
+
+
+
+
+  </script>
+
+
+
+  <!-- ==========Profile Section Ends Here========== -->
+
+
+
+  <!-- ================ footer Section start Here =============== -->
+  <footer class="footer-section">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row g-3 justify-content-center g-lg-0">
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="footer-top-item lab-item">
+              <div class="lab-inner">
+                <div class="lab-thumb">
+                  <img src="assets/images/footer/icons/01.png" alt="Phone-icon">
+                </div>
+                <div class="lab-content">
+                  <span>Phone Number : +00000000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="footer-top-item lab-item">
+              <div class="lab-inner">
+                <div class="lab-thumb">
+                  <img src="assets/images/footer/icons/02.png" alt="email-icon">
+                </div>
+                <div class="lab-content">
+                  <span>Email : admin@shyeyes.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="footer-top-item lab-item">
+              <div class="lab-inner">
+                <div class="lab-thumb">
+                  <img src="assets/images/footer/icons/03.png" alt="location-icon">
+                </div>
+                <div class="lab-content">
+                  <span>Address : noida, Greater Noida</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-middle padding-tb" style="background-image: url(assets/images/footer/bg.png);">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="footer-middle-item-wrapper">
+              <div class="footer-middle-item mb-lg-0">
+                <div class="fm-item-title">
+                  <h4>About SHY-EYES</h4>
+                </div>
+                <div class="fm-item-content">
+                  <p class="mb-4">Energistically coordinate highly efficient procesr
+                    partnerships befor revolutionar growth strategie
+                    improvement viaing awesome</p>
+                  <img src="assets/images/footer/about.jpg" alt="about-image" class="footer-abt-img">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="footer-middle-item-wrapper">
+              <div class="footer-middle-item mb-lg-0">
+                <div class="fm-item-title">
+                  <h4>our Recent news</h4>
+                </div>
+                <div class="fm-item-content">
+                  <div class="fm-item-widget lab-item">
+                    <div class="lab-inner">
+                      <div class="lab-thumb">
+                        <a href="#"> <img src="assets/images/footer/01.jpg" alt="footer-widget-img"></a>
+                      </div>
+                      <div class="lab-content">
+                        <h6><a href="blog-single.html">Enable Seamin Matera Forin And Our
+                            Orthonal Create Vortals.</a></h6>
+                        <p>July 23, 2021</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fm-item-widget lab-item">
+                    <div class="lab-inner">
+                      <div class="lab-thumb">
+                        <a href="#"><img src="assets/images/footer/02.jpg" alt="footer-widget-img"></a>
+                      </div>
+                      <div class="lab-content">
+                        <h6><a href="blog-single.html">Dynamca Network Otuitive Catays For
+                            Plagiarize Mindshare After</a></h6>
+                        <p>July 23, 2021</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fm-item-widget lab-item">
+                    <div class="lab-inner">
+                      <div class="lab-thumb">
+                        <a href="#"><img src="assets/images/footer/03.jpg" alt="footer-widget-img"></a>
+                      </div>
+                      <div class="lab-content">
+                        <h6><a href="blog-single.html">Dynamca Network Otuitive Catays For
+                            Plagiarize Mindshare After</a></h6>
+                        <p>July 23, 2021</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="footer-middle-item-wrapper">
+              <div class="footer-middle-item-3 mb-lg-0">
+                <div class="fm-item-title">
+                  <h4>Our Newsletter Signup</h4>
+                </div>
+                <div class="fm-item-content">
+                  <p>By subscribing to our mailing list you will always
+                    be update with the latest news from us.</p>
+                  <form>
+                    <div class="form-group">
+                      <input type="email" class="form-control" placeholder="Enter email">
+                    </div>
+                    <button type="submit" class="lab-btn">Send Massage <i class="icofont-paper-plane"></i></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="footer-bottom-content text-center">
+              <p>&copy; 2025 <a href="index.html">SHY-EYES</a> — India’s Most Trusted Dating Platform.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ================ footer Section end Here =============== -->
+
+
+
+  <!-- scrollToTop start here -->
+  <a href="#" class="scrollToTop"><i class="icofont-rounded-up"></i></a>
+  <!-- scrollToTop ending here -->
+
+
+
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+
+  <!-- All Scripts -->
+  <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/waypoints.min.js"></script>
+  <script src="assets/js/swiper.min.js"></script>
+  <script src="assets/js/jquery.counterup.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/isotope.pkgd.min.js"></script>
+  <script src="assets/js/functions.js"></script>
+
+
+
+
+
+
+
+
+  <!-- subscription sweetalert script -->
+  <!-- audio -->
+  <script>
+    function handleAudioClick() {
+      Swal.fire({
+        title: 'Subscription Required',
+        text: "Audio feature is available only for subscribed users.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Subscribe Now'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to subscription page
+          window.location.href = 'pricing-plan.html';
+        }
+      });
+    }
+  </script>
+
+
+
+  <!-- vedio -->
+  <script>
+    function handleVedioClick() {
+      Swal.fire({
+        title: 'Subscription Required',
+        text: "vedio feature is available only for subscribed users.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Subscribe Now'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to subscription page
+          window.location.href = 'pricing-plan.html';
+        }
+      });
+    }
+  </script>
+
+  <!--
+<script>
+  function handleChatClick() {
+    const subscription = localStorage.getItem("userSubscription");
+ 
+    if (subscription === "Pro" || subscription === "Premium") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Access Granted',
+        text: 'You can now chat with this user!',
+      });
+    } else {
+      Swal.fire({
+        title: 'Subscription Required',
+        text: "Chat feature is only available for Pro or Premium users.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Subscribe Now'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = 'subscription.html';
+        }
+      });
+    }
+  }
+</script> -->
+
+
+
+
+  <!-- chatbot script -->
+  <script>
+    function handleChatClick() {
+      window.location.href = "assets/chatbot.html";
+
+    }
+  </script>
+
+  <!-- crousal cards  script -->
+
+
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const displayName = document.getElementById("displayName");
+  const profileImage = document.getElementById("profileImage");
+
+  // Match the keys you set in login.js
+  const storedName = localStorage.getItem("fullName") || "Guest";
+  let storedPic = localStorage.getItem("userProfilePic");
+
+  // If no stored pic, use default
+  if (!storedPic) {
+    storedPic = "/uploads/default.png";
+  }
+
+  // If it’s not a full URL and doesn’t already start with /uploads/, prepend it
+  if (!storedPic.startsWith("http") && !storedPic.startsWith("/uploads/")) {
+    storedPic = `/uploads/${storedPic}`;
+  }
+
+  displayName.textContent = storedName;
+  profileImage.src = storedPic;
+
+  // Fallback if image fails to load
+  profileImage.onerror = () => {
+    profileImage.src = "/uploads/default.png";
+  };
+});
+</script>
+
+
+
+</body>
+
+
+<!-- Mirrored from labartisan.net/demo/turulav/turulav-light/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Aug 2025 04:56:13 GMT -->
+
+</html>

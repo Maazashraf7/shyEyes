@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subscription Payment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ <!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    /* h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    } */
+     .heading {
+  font-size: 26px;
+  padding: 15px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f0f4ff, #e0e9ff);
+  color: #f34981;
+  box-shadow: 0 4px 12px rgba(0, 87, 231, 0.15);
+  transition: all 0.3s ease;
+  display: inline-block;
+  animation: pulseIcon 1.5s infinite ease-in-out;
+}
+
+.heading:hover {
+  background: linear-gradient(135deg, #ffe0f5, #ffd3ea);
+  color: #ee4281;
+  transform: scale(1.02);
+}
+
+.heading i {
+  margin-right: 10px;
+  color: #fd6ab1;
+  transition: transform 0.3s ease;
+}
+
+.heading:hover i {
+  transform: rotate(10deg) scale(1.2);
+}
+
+/* Optional animation pulse effect */
+@keyframes pulseIcon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid #ddd;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px 10px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      font-weight: 600;
+      color: #555;
+      transition: 0.3s;
+    }
+
+    .tab i {
+      margin-right: 8px;
+    }
+
+    .tab.active {
+      color: #ec4b8e;
+      border-color: #fa50b0;
+      background: #f0f7ff;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .payment-content {
+      display: none;
+    }
+
+    .payment-content.active {
+      display: block;
+    }
+
+    .qr-section {
+      text-align: center;
+    }
+
+    .qr-section img {
+      max-width: 180px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .input-group {
+      margin: 15px 0;
+    }
+
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      display: block;
+      color: #333;
+    }
+
+    button {
+      background: #f76fb8;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #f74e75;
+    }
+
+    @media (max-width: 600px) {
+      .tab {
+        font-size: 14px;
+        padding: 10px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+  <h2 class="heading">
+  <i class="fas fa-credit-card"></i> Subscribe & Pay
+</h2>
+
+
+
+    <div class="tabs">
+      <div class="tab active" data-tab="upi"><i class="fas fa-qrcode"></i> UPI</div>
+      <div class="tab" data-tab="netbanking"><i class="fas fa-university"></i> Net Banking</div>
+      <div class="tab" data-tab="card"><i class="far fa-credit-card"></i> Card</div>
+      <div class="tab" data-tab="wallet"><i class="fas fa-wallet"></i> Wallet</div>
+    </div>
+
+    <!-- UPI PAYMENT -->
+    <div class="payment-content active" id="upi">
+      <div class="qr-section">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupi@okaxis" alt="QR Code">
+        <p><strong>Scan & Pay via UPI</strong></p>
+      </div>
+      <div class="input-group">
+        <label>Or enter UPI ID</label>
+        <input type="text" placeholder="yourname@upi" />
+      </div>
+      <!-- Proceed Now Button -->
+<button onclick="showSuccessAlert()">
+  <i class="fas fa-check-circle"></i> Pay Now
+</button>
+
+    </div>
+
+    <!-- NET BANKING -->
+    <div class="payment-content" id="netbanking">
+      <div class="input-group">
+        <label>Select Your Bank</label>
+        <select>
+          <option value="">Choose your bank</option>
+          <option>SBI</option>
+          <option>HDFC</option>
+          <option>ICICI</option>
+          <option>Axis Bank</option>
+          <option>Kotak</option>
+        </select>
+      </div>
+      <button><i class="fas fa-university"></i> Continue to Bank</button>
+    </div>
+
+    <!-- CARD PAYMENT -->
+    <div class="payment-content" id="card">
+      <div class="input-group">
+        <label>Card Number</label>
+        <input type="text" placeholder="1234 5678 9012 3456" />
+      </div>
+      <div class="input-group">
+        <label>Expiry Date</label>
+        <input type="text" placeholder="MM/YY" />
+      </div>
+      <div class="input-group">
+        <label>CVV</label>
+        <input type="password" placeholder="123" />
+      </div>
+      <button><i class="fas fa-lock"></i> Pay ₹999</button>
+    </div>
+
+    <!-- WALLET -->
+    <div class="payment-content" id="wallet">
+      <div class="input-group">
+        <label>Select Wallet</label>
+        <select>
+          <option>Paytm</option>
+          <option>PhonePe</option>
+          <option>Google Pay</option>
+          <option>Amazon Pay</option>
+        </select>
+      </div>
+      <button><i class="fas fa-wallet"></i> Proceed to Wallet</button>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".payment-content");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        contents.forEach(c => c.classList.remove("active"));
+
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+      });
+    });
+  </script>
+  <script>
+  function showSuccessAlert() {
+    Swal.fire({
+      title: 'Payment Successful!',
+      text: 'You can now continue your chat.',
+      icon: 'success',
+      confirmButtonText: 'Continue to Chat',
+      confirmButtonColor: '#4CAF50' // green color
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to chat page
+        window.location.href = "/ShyEyes/assets/chatbot2.html"; // 🔁 change this to your actual chat page
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

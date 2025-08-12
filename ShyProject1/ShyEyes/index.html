@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- x-icon -->
+    <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon">
+    <!-- Other css -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/icofont.min.css">
+    <link rel="stylesheet" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>SHY-EYES – Discover Meaningful Connections</title>
+<style>
+        /* ====== FLOATING BUTTON ====== */
+        /* #floatingProfile {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #floatingProfile .msgTip {
+            background: #ffe6ff;
+            padding: 14px 20px;
+            border-radius: 40px;
+            color: #7e004d;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, .15);
+        }
+
+        .avatarWrap {
+            position: relative;
+            width: 72px;
+            height: 72px;
+        }
+
+        .avatarWrap img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .35);
+            object-fit: cover;
+            cursor: pointer
+        }
+
+        .avatarWrap .radar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(67, 225, 83, 0.989);
+            border-radius: 50%;
+            animation: radar 1.6s infinite;
+            z-index: -1
+        }
+
+        @keyframes radar {
+            from {
+                transform: scale(.7);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        /* ===== CHAT BOX ===== */
+        /* #datingChatPopup {
+            position: fixed;
+            right: 30px;
+            bottom: 110px;
+            width: 350px;
+            background: rgba(255, 255, 255, .25);
+            border: 2px solid rgba(255, 255, 255, .4);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            display: none;
+            z-index: 9998;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .45);
+            font-family: Poppins, sans-serif;
+        } */
+
+        /* .headPop {
+            background: rgba(255, 50, 131, .85);
+            color: #fff;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        .headPop img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        } */
+
+        /* .onlineDot {
+            background: #27ff63;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            margin-left: 4px;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: .4;
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        } */
+
+        /* .typingHeader {
+            margin-left: 5px;
+            color: #fff;
+            font-size: 12px;
+            display: none;
+        }
+
+        .chatArea {
+            background: rgba(255, 255, 255, .15);
+            height: 300px;
+            overflow-y: auto;
+            padding: 18px;
+        } */
+
+        /* .bubble {
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            max-width: 75%;
+            font-size: 14px;
+            box-shadow: 0 3px 9px rgba(0, 0, 0, .25);
+            animation: drop .5s;
+        }
+
+        @keyframes drop {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        } */
+
+        /* .bubble.me {
+            margin-left: auto;
+            background: #ffd8ee;
+        }
+
+        .bubble.typing {
+            font-style: italic;
+            color: #666;
+        }
+
+        .timeStamp {
+            display: block;
+            text-align: right;
+            font-size: 10px;
+            margin-top: 4px;
+            color: #888;
+        } */
+
+        /* .tick {
+            margin-left: 4px;
+            color: #27ff63;
+            font-size: 12px;
+        }
+
+        .typeBox {
+            background: rgba(255, 255, 255, .6);
+            padding: 12px;
+            display: flex;
+            gap: 6px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .typeBox input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background: #fff;
+        } */
+
+        /* .typeBox button {
+            width: 45px;
+            height: 45px;
+            background: #ff3385;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .disabledChat {
+            opacity: .4;
+            pointer-events: none;
+        }
+
+        .typingBubble {
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #666;
+            width: 80px;
+            animation: drop 0.4s;
+        } */
+
+        /* @keyframes typingdots {
+            0% {
+                content: ".";
+            }
+
+            33% {
+                content: "..";
+            }
+
+            66% {
+                content: "...";
+            }
+        }
+
+        .typingHeader {
+            margin-left: 5px;
+            color: #fff;
+            font-size: 12px;
+            display: none;
+        } */
+/* 
+        .onlineDot {
+            background: #27ff63;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 6px;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: .4;
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }  */
+    </style>
+</head>
+<body>
+    <audio id="greet" src="assets/audio/ElevenLabs_2025-08-05T08_21_13_Glinda_pre_sp100_s50_sb75_se0_b_m2.mp3"></audio>
+    <audio id="promo" src="assets/audio/2nd audio.mp3"></audio>
+ 
+    <!-- FLOAT BUTTON -->
+    <!-- <div id="floatingProfile">
+        <div class="msgTip">Hi 👋 accept my friend request 💌</div>
+        <div class="avatarWrap">
+            <span class="radar"></span>
+            <img src="assets/chatbot/brooke-cagle-kvKSL7B6eTo-unsplash.jpg">
+        </div>
+    </div> -->
+ 
+    <!-- CHAT BOX -->
+    <!-- <div id="datingChatPopup">
+        <div class="headPop">
+            <div style="display:flex;gap:12px;align-items:center;">
+                <img src="assets/chatbot/brooke-cagle-kvKSL7B6eTo-unsplash.jpg">
+                <strong>Saloni 💖 <span class="onlineDot"></span></strong>
+                <span id="typingHeader" class="typingHeader"></span>
+            </div>
+            <span id="dClose">✕</span>
+        </div>
+        <div class="chatArea" id="chatScroll"></div>
+        <div class="typeBox">
+            <input id="chatInput" type="text" placeholder="Type a message...">
+            <button id="sendBtn">➤</button>
+        </div>
+    </div> -->
+ 
+
+    <!-- AUDIO -->
+    <audio id="ting">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3" type="audio/mp3">
+    </audio>
+
+
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <dotlottie-wc src="https://lottie.host/8d6af0b2-23e7-46ba-a471-679685df0972/nYaMcOGKyJ.lottie"
+                style="width: 200px; height: 200px" speed="1" autoplay loop></dotlottie-wc>
+        </div>
+    </div>
+    <!-- preloader ending here -->
+
+    <!-- start : left bottom  -->
+    <dotlottie-wc class="bottom-left-lottie"
+        src="https://lottie.host/bb2e1cf4-809b-484d-a3e9-1defcba49af4/ti439wNbfk.lottie" speed="1" autoplay loop>
+    </dotlottie-wc>
+    <!-- end : left bottom  -->
+
+     <!-- start : right bottom   -->
+    <dotlottie-wc src="https://lottie.host/4afa7324-f055-4ae1-b3de-f2e84ede69d2/13WgK0RE6K.lottie" style="
+    width: 230px;
+    height: 230px;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    z-index: 9999;" speed="1" autoplay loop>
+    </dotlottie-wc> 
+
+    <!-- end : right bottom  -->
+    <!-- ==========Header Section Starts Here========== -->
+    <header class="header-section">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-area">
+                    <ul class="left">
+                        <li>
+                            <i class="icofont-ui-call"></i> <span>+00000000</span>
+                        </li>
+                        <li>
+                            <i class="icofont-location-pin"></i> Noida, Greater Noida
+                        </li>
+                    </ul>
+                    <ul class="social-icons d-flex align-items-center">
+                        <li>
+                            <p>
+                                Find us on :
+                            </p>
+                        </li>
+                        <li>
+                            <a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="vimeo"><i class="icofont-vimeo"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="skype"><i class="icofont-skype"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="rss"><i class="icofont-rss-feed"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/logo/shylogo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="menu-area">
+                        <ul class="menu">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+
+                             <li>
+                                <a href="index.html">About Us</a>
+                            </li>
+                            <li>
+                                <a href="#0">Features</a>
+                                <ul class="submenu">
+                                    
+                                    <li><a href="members.html">All Members</a></li>
+                                      <li><a href="profile2.html">profiles</a></li>
+                                    <li><a href="profile.html">Member Profile</a></li>
+
+                                    <!-- <li><a href="login.html">Login</a></li>
+                                    <li><a href="signup.html">Sign Up</a></li> -->
+                                    <li><a href="pricing-plan.html">Pricing Plan</a></li>
+                                    <!-- <li><a href="404.html">404 Page</a></li> -->
+
+                                </ul>
+                            </li>
+                          
+                            <li>
+                                <a href="#0">Blog</a>
+                                <ul class="submenu">
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="blog-single.html">Blog Single</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                        <a href="login.html" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
+                        <a href="register.html" class="signup"><i class="icofont-users"></i> <span>REGISTER</span> </a>
+
+                        <!-- toggle icons -->
+                        <div class="header-bar d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="ellepsis-bar d-lg-none">
+                            <i class="icofont-info-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ==========Header Section Ends Here========== -->
+    <!-- ================ Banner Section start Here =============== -->
+    
+    <section class="banner-section">
+        <div class="container">
+            <div class="section-wrapper">
+                <div class="row align-items-end">
+                    <div class="col-lg-6">
+                        <div class="banner-content">
+                            <div class="intro-form">
+                                <div class="intro-form-inner">
+                                    <h3>Welcome to SHY-EYES</h3>
+                                    <p>Real Connections Start with <strong>SHY-EYES</strong> – Where Finding Your Perfect
+                                        Match Feels Effortless and Fun.</p>
+                                    <form action="#" class="banner-form">
+                                        <div class="gender">
+                                            <label for="gender" class="left">I am a </label>
+                                            <div class="custom-select right">
+                                                <select name="gender" id="gender">
+                                                    <option value="0">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Non-Binary</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="person">
+                                            <label for="gender-two" class="left">Looking for</label>
+                                            <div class="custom-select right">
+                                                <select name="gender" id="gender-two">
+                                                    <option value="0">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Anyone</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="age">
+                                            <label for="age" class="left">Age</label>
+                                            <div class="right d-flex justify-content-between">
+                                                <div class="custom-select">
+                                                    <select name="age-start" id="age">
+                                                        <option value="1">18</option>
+                                                        <option value="2">19</option>
+                                                        <option value="3">20</option>
+                                                        <option value="4">21</option>
+                                                        <option value="5">22</option>
+                                                        <option value="6">23</option>
+                                                        <option value="7">24</option>
+                                                        <option value="8">25</option>
+                                                        <option value="9">26</option>
+                                                        <option value="10">27</option>
+                                                        <option value="11">28</option>
+                                                        <option value="12">29</option>
+                                                        <option value="13">30</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="custom-select">
+                                                    <select name="age-end" id="age-two">
+                                                        <option value="1">18+</option>
+                                                        <option value="2">19</option>
+                                                        <option value="3">20</option>
+                                                        <option value="4">21</option>
+                                                        <option value="5">22</option>
+                                                        <option value="6">23</option>
+                                                        <option value="7">24</option>
+                                                        <option value="8">25</option>
+                                                        <option value="9">26</option>
+                                                        <option value="10">27</option>
+                                                        <option value="11">28</option>
+                                                        <option value="12">29</option>
+                                                        <option value="13">30</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="city">
+                                            <label for="city" class="left">City</label>
+                                            <input class="right" type="text" id="city" placeholder="Enter your city...">
+                                        </div>
+                                        <button class="">Find Your Match</button>
+                                    </form>
+                                    <ul class="social-list">
+                                        <li class="google">
+                                            <a href="#">
+                                                <img src="assets/images/banner/google.png" alt="Google">
+                                                <span>Continue with Google</span>
+                                            </a>
+                                        </li>
+                                        <li class="facebook">
+                                            <a href="#">
+                                                <i class="icofont-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="twitter">
+                                            <a href="#">
+                                                <i class="icofont-twitter"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="banner-thumb">
+                            <img src="assets/images/banner/01.png" alt="SHY-EYES Banner Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="all-shapes">
+            <img src="assets/images/banner/banner-shapes/01.png" alt="shape" class="banner-shape shape-1">
+            <img src="assets/images/banner/banner-shapes/02.png" alt="shape" class="banner-shape shape-2">
+            <img src="assets/images/banner/banner-shapes/03.png" alt="shape" class="banner-shape shape-3">
+            <img src="assets/images/banner/banner-shapes/04.png" alt="shape" class="banner-shape shape-4">
+            <img src="assets/images/banner/banner-shapes/05.png" alt="shape" class="banner-shape shape-5">
+            <img src="assets/images/banner/banner-shapes/06.png" alt="shape" class="banner-shape shape-6">
+            <img src="assets/images/banner/banner-shapes/07.png" alt="shape" class="banner-shape shape-7">
+            <img src="assets/images/banner/banner-shapes/08.png" alt="shape" class="banner-shape shape-8">
+        </div>
+    </section>
+
+    <!-- ================ Banner Section end Here =============== -->
+    <!-- ================ Member Section Start Here =============== -->
+  
+    <section class="member-section padding-tb">
+        <div class="container">
+            <div class="section-header">
+                <h4 class="theme-color">Meet Exciting Singles Near You!</h4>
+                <h2>New Members in India</h2>
+            </div>
+            <div class="section-wrapper">
+                <div class="row justify-content-center g-3 g-md-4">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div class="lab-item member-item style-1">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/01.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Aarav Sharma</a> </h6>
+                                    <p>Active 1 Day</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div class="lab-item member-item style-1">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/02.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Priya Singh</a></h6>
+                                    <p>Active 2 Days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div class="lab-item member-item style-1">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/03.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Rahul Verma</a></h6>
+                                    <p>Active 3 Days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div class="lab-item member-item style-1">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/04.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Ananya Desai</a></h6>
+                                    <p>Active 5 Days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div class="lab-item member-item style-1">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/05.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Rohan Kapoor</a></h6>
+                                    <p>Active 1 Day</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div class="lab-item member-item style-1">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/06.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Simran Kaur</a></h6>
+                                    <p>Active 1 Day</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="member-button-group d-flex flex-wrap justify-content-center">
+                    <a href="signup.html" class="lab-btn">
+                        <i class="icofont-users"></i>
+                        <span>Join Now & Start Dating</span>
+                    </a>
+                    <a href="login.html" class="lab-btn">
+                        <i class="icofont-heart"></i>
+                        <span>See Who’s Waiting for You ❤️</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ Member Section end Here =============== -->
+    <!-- ================ About Section start Here =============== -->
+    <section class="about-section padding-tb bg-img">
+        <div class="container">
+            <div class="section-header">
+                <h4>About SHY-EYES</h4>
+                <h2>Find Real Connections, One Date at a Time ❤️</h2>
+            </div>
+            <div class="section-wrapper">
+                <div class="row justify-content-center g-4">
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="lab-item about-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/about/01.png" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h2 class="counter">50,452</h2>
+                                    <p>Verified Profiles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="lab-item about-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/about/02.png" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h2 class="counter">12,784</h2>
+                                    <p>Active Members Today</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="lab-item about-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/about/03.png" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h2 class="counter">6,789</h2>
+                                    <p>Men Currently Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="lab-item about-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/about/04.png" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h2 class="counter">5,995</h2>
+                                    <p>Women Currently Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ About Section end Here =============== -->
+ <!-- ================ Work Section start Here =============== -->
+
+ <section class="work-section padding-tb">
+        <div class="container">
+            <div class="section-header">
+                <h4 class="theme-color">How SHY-EYES Works?</h4>
+                <h2>You’re Just 3 Simple Steps Away From Finding Love ❤️</h2>
+            </div>
+            <div class="section-wrapper">
+                <div class="row justify-content-center g-5">
+
+                    <!-- Step 1 -->
+                    <div class="col-lg-4 col-sm-6 col-12 px-4">
+                        <div class="lab-item work-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <div class="thumb-inner">
+                                        <img src="assets/images/work/01.png" alt="work-img">
+                                        <div class="step">
+                                            <span>Step</span>
+                                            <p>01</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lab-content">
+                                    <h4>Create Your Profile</h4>
+                                    <p>Sign up and tell us about yourself. Upload your best photos and share your
+                                        interests to attract like-minded singles.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="col-lg-4 col-sm-6 col-12 px-4">
+                        <div class="lab-item work-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <div class="thumb-inner">
+                                        <img src="assets/images/work/02.png" alt="work-img">
+                                        <div class="step">
+                                            <span>Step</span>
+                                            <p>02</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lab-content">
+                                    <h4>Discover Your Matches</h4>
+                                    <p>Browse through verified profiles, use filters to find your perfect match, and
+                                        start meaningful conversations instantly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="col-lg-4 col-sm-6 col-12 px-4">
+                        <div class="lab-item work-item">
+                            <div class="lab-inner text-center">
+                                <div class="lab-thumb">
+                                    <div class="thumb-inner">
+                                        <img src="assets/images/work/03.png" alt="work-img">
+                                        <div class="step">
+                                            <span>Step</span>
+                                            <p>03</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lab-content">
+                                    <h4>Start Dating & Enjoy!</h4>
+                                    <p>Connect, chat, and plan your first date. With SHY-EYES, you’re just a few clicks
+                                        away from exciting real-life connections.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ Work Section end Here =============== -->
+    <!-- ================ Success Story Section start Here =============== -->
+  
+    <section class="story-section padding-tb bg-img">
+        <div class="container">
+            <div class="section-header">
+                <h4>SHY-EYES Love Stories</h4>
+                <h2>Beautiful Journeys That Started With A Swipe 💕</h2>
+            </div>
+            <div class="section-wrapper">
+                <div class="row justify-content-center g-4">
+
+                    <!-- Story 1 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="story-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/story/01.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4><a href="blog-single.html">Ankit & Priya - From Chats to Forever ❤️</a></h4>
+                                    <p>“We started chatting casually on SHY-EYES and instantly clicked. Within weeks, we
+                                        were inseparable. Now, we’re planning our engagement!”</p>
+                                    <a href="blog-single.html" class="lab-btn"><i class="icofont-circled-right"></i>
+                                        Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Story 2 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="story-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/story/02.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4><a href="blog-single.html">Rohit & Neha - A Match Made on SHY-EYES ✨</a></h4>
+                                    <p>“Thanks to SHY-EYES, I met the love of my life. We bonded over common interests
+                                        and now we can’t imagine life without each other.”</p>
+                                    <a href="blog-single.html" class="lab-btn"><i class="icofont-circled-right"></i>
+                                        Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Story 3 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="story-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/story/03.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4><a href="blog-single.html">Aarav & Simran - From First Chat to First Date 🌟</a>
+                                    </h4>
+                                    <p>“Never thought a simple message could lead to such a beautiful connection. Our
+                                        first date was magical, all thanks to SHY-EYES.”</p>
+                                    <a href="blog-single.html" class="lab-btn"><i class="icofont-circled-right"></i>
+                                        Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ Success Story Section end Here =============== -->
+
+    <!-- ================ Top Member Section start Here =============== 
+
+    <section class="top-member-section padding-tb">
+        <div class="container">
+            <div class="section-header">
+                <h4 class="theme-color">Top Members</h4>
+                <h2>SHY-EYES Members Online Now 💖</h2>
+            </div>
+            <div class="section-wrapper">
+                <ul class="button-group filters-button-group w-100 d-flex flex-wrap justify-content-center">
+                    <li class="button is-checked filter-btn" data-filter="*"><i class="icofont-heart-alt"></i> Show All
+                    </li>
+                    <li class="button filter-btn" data-filter=".girl"><i class="icofont-girl"></i> New Girl Members</li>
+                    <li class="button filter-btn" data-filter=".boy"><i class="icofont-hotel-boy"></i> New Boy Members
+                    </li>
+                </ul>
+
+                <div class="grid-memberlist">
+                    <!-- Sample Member - Girl 
+                    <div class="grid-member filter-item girl">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/01.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Aarohi (India)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Member - Boy 
+                    <div class="grid-member filter-item boy">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/02.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Luca (Italy)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add more mixed international/Indian names ---
+                    <div class="grid-member filter-item girl">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/03.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Mira (India)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-member filter-item boy">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/04.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">David (USA)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continue similar pattern with more global/Indian names --
+                    <div class="grid-member filter-item girl">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/05.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Sofia (Spain)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-member filter-item boy">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/06.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Arjun (India)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-member filter-item girl">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/07.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Nikita (India)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Member - Boy --
+                    <div class="grid-member filter-item boy">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/08.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Ethan (Canada)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Member - Girl --
+                    <div class="grid-member filter-item girl">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/09.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Aya (Japan)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Member - Boy --
+                    <div class="grid-member filter-item boy">
+                        <div class="lab-item member-item style-1 style-2">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/member/10.jpg" alt="member-img">
+                                </div>
+                                <div class="lab-content">
+                                    <h6><a href="profile.html">Rahul (India)</a></h6>
+                                    <p class="online-status blink-green">🟢 Online Now</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ Top Member Section end Here =============== -->
+    <!-- ==============End Top Member section Here====================== -->
+    <!-- ================ Active Group Section Start Here =============== -->
+   
+    <section class="group-section padding-tb bg-img">
+        <div class="container">
+            <div class="section-header">
+                <h4>Recently Active Groups</h4>
+                <h2>SHY-EYES ❤️ Most Loved Active Groups</h2>
+            </div>
+            <div class="section-wrapper">
+                <div class="row g-4">
+                    <div class="col-xl-6 col-12">
+                        <div class="group-item lab-item">
+                            <div class="lab-inner d-flex flex-wrap align-items-center p-4">
+                                <div class="lab-thumb me-sm-4 mb-4 mb-sm-0">
+                                    <img src="assets/images/group/01.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4>💬 Flirty Vibes</h4>
+                                    <p>Where playful hearts meet & sweet convos begin. Join and vibe with singles
+                                        worldwide!</p>
+                                    <ul class="img-stack d-flex">
+                                        <li><img src="assets/images/group/group-mem/01.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/02.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/03.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/04.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/05.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/06.png" alt="member-img"></li>
+                                        <li class="bg-theme">12+</li>
+                                    </ul>
+                                    <div class="test">
+                                        <a href="active-group.html" class="lab-btn"><i class="icofont-users-alt-5"></i>
+                                            View Group</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-12">
+                        <div class="group-item lab-item">
+                            <div class="lab-inner d-flex flex-wrap align-items-center p-4">
+                                <div class="lab-thumb me-sm-4 mb-4 mb-sm-0">
+                                    <img src="assets/images/group/02.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4>🌍 Global Crushes</h4>
+                                    <p>From Mumbai to Madrid – find flirty friends & fun convos from around the world!
+                                    </p>
+                                    <ul class="img-stack d-flex">
+                                        <li><img src="assets/images/group/group-mem/01.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/02.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/03.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/04.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/05.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/06.png" alt="member-img"></li>
+                                        <li class="bg-theme">12+</li>
+                                    </ul>
+                                    <div class="test">
+                                        <a href="active-group.html" class="lab-btn"><i class="icofont-users-alt-5"></i>
+                                            View Group</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-12">
+                        <div class="group-item lab-item">
+                            <div class="lab-inner d-flex flex-wrap align-items-center p-4">
+                                <div class="lab-thumb me-sm-4 mb-4 mb-sm-0">
+                                    <img src="assets/images/group/03.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4>🎶 Music & Match</h4>
+                                    <p>Share your favorite romantic tracks & find your rhythm with like-minded singles!
+                                    </p>
+                                    <ul class="img-stack d-flex">
+                                        <li><img src="assets/images/group/group-mem/01.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/02.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/03.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/04.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/05.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/06.png" alt="member-img"></li>
+                                        <li class="bg-theme">12+</li>
+                                    </ul>
+                                    <div class="test">
+                                        <a href="active-group.html" class="lab-btn"><i class="icofont-users-alt-5"></i>
+                                            View Group</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-12">
+                        <div class="group-item lab-item">
+                            <div class="lab-inner d-flex flex-wrap align-items-center p-4">
+                                <div class="lab-thumb me-sm-4 mb-4 mb-sm-0">
+                                    <img src="assets/images/group/04.jpg" alt="img">
+                                </div>
+                                <div class="lab-content">
+                                    <h4>📸 Selfie Singles</h4>
+                                    <p>Post your cutest selfies, react, and connect with fun, flirty members instantly
+                                        💘</p>
+                                    <ul class="img-stack d-flex">
+                                        <li><img src="assets/images/group/group-mem/01.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/02.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/03.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/04.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/05.png" alt="member-img"></li>
+                                        <li><img src="assets/images/group/group-mem/06.png" alt="member-img"></li>
+                                        <li class="bg-theme">12+</li>
+                                    </ul>
+                                    <div class="test">
+                                        <a href="active-group.html" class="lab-btn"><i class="icofont-users-alt-5"></i>
+                                            View Group</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ Active Group Section end Here =============== -->
+    <!-- ================ Review Section start Here =============== -->
+    <section class="clints-section padding-tb">
+        <div class="container">
+            <div class="section-header">
+                <h4 class="theme-color">What Our Members Say</h4>
+                <h2>Real Love Stories From SHY-EYES Users 💖</h2>
+            </div>
+            <div class="section-wrapper">
+                <div class="clients">
+
+                    <!-- Indian Female -->
+                    <div class="client-list">
+                        <div class="client-content">
+                            <p>Thanks to SHY-EYES, I found my soulmate just 50 km away! Our first date was magical, and
+                                now we're planning a future together.</p>
+                            <div class="client-info">
+                                <div class="name-desi">
+                                    <h6>Priya Sharma</h6>
+                                    <span>Teacher, Delhi</span>
+                                </div>
+                                <div class="rating">
+                                    <ul>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-thumb">
+                            <img src="assets/images/group/group-mem/01.png" alt="lab-clients">
+                        </div>
+                    </div>
+
+                    <!-- International Male -->
+                    <div class="client-list">
+                        <div class="client-content">
+                            <p>As a traveler in India, I never expected to meet someone so genuine online. SHY-EYES
+                                helped bridge that gap beautifully.</p>
+                            <div class="client-info">
+                                <div class="name-desi">
+                                    <h6>Mark Evans</h6>
+                                    <span>Photographer, UK</span>
+                                </div>
+                                <div class="rating">
+                                    <ul>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-thumb">
+                            <img src="assets/images/group/group-mem/02.png" alt="lab-clients">
+                        </div>
+                    </div>
+
+                    <!-- Indian Male -->
+                    <div class="client-list">
+                        <div class="client-content">
+                            <p>I was skeptical about dating apps, but SHY-EYES changed my mind. I met Rhea through a live
+                                chat and we instantly clicked.</p>
+                            <div class="client-info">
+                                <div class="name-desi">
+                                    <h6>Rahul Mehta</h6>
+                                    <span>Engineer, Mumbai</span>
+                                </div>
+                                <div class="rating">
+                                    <ul>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-thumb">
+                            <img src="assets/images/group/group-mem/03.png" alt="lab-clients">
+                        </div>
+                    </div>
+
+                    <!-- International Female -->
+                    <div class="client-list">
+                        <div class="client-content">
+                            <p>SHY-EYES is so user-friendly! I met an amazing Indian guy while visiting Goa. We’re now in
+                                a beautiful long-distance relationship.</p>
+                            <div class="client-info">
+                                <div class="name-desi">
+                                    <h6>Maria Gonzales</h6>
+                                    <span>Writer, Spain</span>
+                                </div>
+                                <div class="rating">
+                                    <ul>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-thumb">
+                            <img src="assets/images/group/group-mem/04.png" alt="lab-clients">
+                        </div>
+                    </div>
+
+                    <!-- Indian Couple -->
+                    <div class="client-list">
+                        <div class="client-content">
+                            <p>We both swiped right on SHY-EYES just for fun. But after a few video calls and chats, we
+                                realized it was real love.</p>
+                            <div class="client-info">
+                                <div class="name-desi">
+                                    <h6>Riya & Karan</h6>
+                                    <span>Couple, Bangalore</span>
+                                </div>
+                                <div class="rating">
+                                    <ul>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-thumb">
+                            <img src="assets/images/group/group-mem/05.png" alt="lab-clients">
+                        </div>
+                    </div>
+
+                    <!-- International Tech User -->
+                    <div class="client-list">
+                        <div class="client-content">
+                            <p>I built connections with people across India. SHY-EYES offers both casual chats and
+                                serious matchmaking. Impressive platform!</p>
+                            <div class="client-info">
+                                <div class="name-desi">
+                                    <h6>Lucia Moretti</h6>
+                                    <span>Software Developer, Italy</span>
+                                </div>
+                                <div class="rating">
+                                    <ul>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                        <li><i class="icofont-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-thumb">
+                            <img src="assets/images/group/group-mem/06.png" alt="lab-clients">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ Review Section end Here =============== -->
+    <!-- ================ App Section start Here =============== -->
+    <section class="app-section bg-pink">
+        <div class="container">
+            <div class="section-wrapper padding-tb">
+                <div class="app-content">
+                    <h4>Download the Shy-Eyes App</h4>
+                    <h2>Connect With Genuine People Instantly</h2>
+                    <p>Join India's most trusted private dating and networking platform. Over 5,00,000+ users have
+                        already started their journey towards meaningful connections. With Shy-Eyes, safety, privacy, and
+                        real conversations come first.</p>
+
+                    <ul class="app-download d-flex flex-wrap">
+                        <li>
+                            <a href="#" class="d-flex flex-wrap align-items-center">
+                                <div class="app-thumb">
+                                    <img src="assets/images/app/apple.png" alt="apple">
+                                </div>
+                                <div class="app-content">
+                                    <p>Download on the</p>
+                                    <h4>App Store</h4>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="d-inline-block">
+                            <a href="#" class="d-flex flex-wrap align-items-center">
+                                <div class="app-thumb">
+                                    <img src="assets/images/swipe-down.png" style="width: 30px;" alt="Download App">
+
+                                </div>
+                                <div class="app-content">
+                                    <p>Get it on APK File</p>
+                                    <h4>Download App</h4>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mobile-app">
+                    <img src="assets/images/app/mobile-view.png" alt="Shy-Eyes Mobile Preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================ App Section end Here =============== -->
+<!-- !-- ye new right s pop up k lie add kia hia -->
+<!-- <div class="notification-container" id="notificationContainer"></div> -->
+<!-- <div id="notification-container"></div> -->
+     <!-- ye new right s pop up k lie add kia hai -->
+
+    <!-- ================ footer Section start Here =============== -->
+   <footer class="footer-section">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-3 justify-content-center g-lg-0">
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="footer-top-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/footer/icons/01.png" alt="Phone-icon">
+                                </div>
+                                <div class="lab-content">
+                                    <span>Phone Number : +00000000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="footer-top-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/footer/icons/02.png" alt="email-icon">
+                                </div>
+                                <div class="lab-content">
+                                    <span>Email : admin@shyeyes.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="footer-top-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/footer/icons/03.png" alt="location-icon">
+                                </div>
+                                <div class="lab-content">
+                                    <span>Address : noida, Greater Noida</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-middle padding-tb" style="background-image: url(assets/images/footer/bg.png);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="footer-middle-item-wrapper">
+                            <div class="footer-middle-item mb-lg-0">
+                                <div class="fm-item-title">
+                                    <h4>About SHY-EYES</h4>
+                                </div>
+                                <div class="fm-item-content">
+                                    <p class="mb-4">Energistically coordinate highly efficient procesr
+                                        partnerships befor revolutionar growth strategie
+                                        improvement viaing awesome</p>
+                                    <img src="assets/images/footer/about.jpg" alt="about-image" class="footer-abt-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="footer-middle-item-wrapper">
+                            <div class="footer-middle-item mb-lg-0">
+                                <div class="fm-item-title">
+                                    <h4>our Recent news</h4>
+                                </div>
+                                <div class="fm-item-content">
+                                    <div class="fm-item-widget lab-item">
+                                        <div class="lab-inner">
+                                            <div class="lab-thumb">
+                                                <a href="#"> <img src="assets/images/footer/01.jpg"
+                                                        alt="footer-widget-img"></a>
+                                            </div>
+                                            <div class="lab-content">
+                                                <h6><a href="blog-single.html">Enable Seamin Matera Forin And Our
+                                                        Orthonal Create Vortals.</a></h6>
+                                                <p>July 23, 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fm-item-widget lab-item">
+                                        <div class="lab-inner">
+                                            <div class="lab-thumb">
+                                                <a href="#"><img src="assets/images/footer/02.jpg"
+                                                        alt="footer-widget-img"></a>
+                                            </div>
+                                            <div class="lab-content">
+                                                <h6><a href="blog-single.html">Dynamca Network Otuitive Catays For
+                                                        Plagiarize Mindshare After</a></h6>
+                                                <p>July 23, 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fm-item-widget lab-item">
+                                        <div class="lab-inner">
+                                            <div class="lab-thumb">
+                                                <a href="#"><img src="assets/images/footer/03.jpg"
+                                                        alt="footer-widget-img"></a>
+                                            </div>
+                                            <div class="lab-content">
+                                                <h6><a href="blog-single.html">Dynamca Network Otuitive Catays For
+                                                        Plagiarize Mindshare After</a></h6>
+                                                <p>July 23, 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="footer-middle-item-wrapper">
+                            <div class="footer-middle-item-3 mb-lg-0">
+                                <div class="fm-item-title">
+                                    <h4>Our Newsletter Signup</h4>
+                                </div>
+                                <div class="fm-item-content">
+                                    <p>By subscribing to our mailing list you will always
+                                        be update with the latest news from us.</p>
+                                    <form>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Enter email">
+                                        </div>
+                                        <button type="submit" class="lab-btn">Send Massage <i
+                                                class="icofont-paper-plane"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-bottom-content text-center">
+                            <p>&copy; 2025 <a href="index.html">SHY-EYES</a> — India’s Most Trusted Dating Platform.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ================ footer Section end Here =============== -->
+    <!-- scrollToTop start here -->
+    <!-- <a href="#" class="scrollToTop"><i class="icofont-rounded-up"></i></a> -->
+    <!-- scrollToTop ending here -->
+
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <!-- All Scripts -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/swiper.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    const avatar = document.querySelector('.avatarWrap img');
+    const tip = document.querySelector('#floatingProfile .msgTip');
+    const popup = document.getElementById('datingChatPopup');
+    const chatArea = document.getElementById('chatScroll');
+    const sendBtn = document.getElementById('sendBtn');
+    const input = document.getElementById('chatInput');
+    const ting = document.getElementById('ting');
+    const typingHeader = document.getElementById('typingHeader');
+
+    if (ting) ting.volume = 0.6;
+
+    let stage = 0;
+
+    // Open chat popup
+    avatar.onclick = () => {
+        popup.style.display = 'block';
+        tip.style.display = 'none';
+        if (stage === 0) {
+            setTimeout(() => botThinking(""), 1200);
+        }
+    };
+
+    document.getElementById('dClose').onclick = () => {
+        popup.style.display = 'none';
+        tip.style.display = 'block';
+    };
+
+    // Send message
+    sendBtn.onclick = sendMsg;
+    input.onkeypress = e => {
+        if (e.key === "Enter") sendMsg();
+    };
+
+    function sendMsg() {
+        if (stage === 99) return;
+        let v = input.value.trim();
+        if (!v) return;
+        appendBubble(v, true);
+        input.value = "";
+        setTimeout(() => botThinking(v.toLowerCase()), 1000);
+    }
+
+    function appendBubble(txt, isUser = false) {
+        let div = document.createElement('div');
+        div.className = isUser ? "bubble me" : "bubble";
+
+        div.innerHTML = `
+            ${txt}
+            <span class="timeStamp">
+                ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                ${isUser ? '<span class="tick"><i class="fa-solid fa-check-double"></i></span>' : ''}
+            </span>
+        `;
+        chatArea.appendChild(div);
+        chatArea.scrollTop = chatArea.scrollHeight;
+        if (ting) ting.play();
+    }
+
+    function botThinking(userInput) {
+        typingHeader.style.display = 'inline-block';
+        typingHeader.textContent = 'typing...';
+
+        let tb = document.createElement('div');
+        tb.className = 'typingBubble';
+        tb.id = 'botTyping';
+        tb.innerHTML = `<span class="tdot">.</span>`;
+        chatArea.appendChild(tb);
+        chatArea.scrollTop = chatArea.scrollHeight;
+
+        let dot = 1;
+        let an = setInterval(() => {
+            tb.querySelector('.tdot').textContent = ".".repeat(dot);
+            dot = (dot % 3) + 1;
+        }, 300);
+
+        setTimeout(() => {
+            clearInterval(an);
+            typingHeader.style.display = 'none';
+            tb.remove();
+            botReply(userInput);
+        }, 2500);
+    }
+
+    function botReply(userInput) {
+        if (stage === 0) {
+            appendBubble("Finally tum online aa gaye ho... Hi kaise ho?");
+            stage = 1;
+        } else if (stage === 1) {
+            appendBubble("Aur ghar me sab thik hai na?");
+            stage = 2;
+        } else if (stage === 2) {
+            appendBubble("Sab badiya... kya hum call ya VC pe baat kare?");
+            stage = 3;
+        } else if (stage === 3 && /(ha|sure|yes)/i.test(userInput)) {
+            Swal.fire({
+                title: "❤️ Let’s Go Deeper",
+                html: "To continue chatting you need to <b>buy subscription</b> 😘",
+                iconHtml: '<i class="fa-solid fa-heart"></i>',
+                showCancelButton: true,
+                confirmButtonText: "Buy Plan",
+                cancelButtonText: "No Thanks",
+                confirmButtonColor: "#ff3385"
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = "pricing-plan.html";
+                }
+            });
+
+            setTimeout(() => appendBubble("sorry...main without subscription VC nahi kar paa rhi 😞"), 2600);
+            setTimeout(() => appendBubble("jaldi subscription le na pls 💘"), 4800);
+
+            input.disabled = true;
+            sendBtn.classList.add("disabledChat");
+            stage = 99;
+        } else {
+            appendBubble("hmm...okay 🙂");
+        }
+    }
+</script>
+
+<script>
+window.addEventListener("load", function(){
+    // auto-play greeting voice
+    document.getElementById("greet").play();
+ 
+    // after 4 sec play subscription promo voice
+    setTimeout(function(){
+        document.getElementById("promo").play();
+    },9000);
+});
+</script>
+
+<!-- notification sweet alert pop box script -->
+
+<!-- ye right side s pop up k lie script add lia hai -->
+ 
+<!-- <script>
+function showNotification(profile) {
+  const container = document.getElementById('notification-container');
+  const notif = document.createElement('div');
+  notif.classList.add('notification');
+
+  const heartClass = profile.status === 'accepted' ? 'accepted'
+                    : profile.status === 'rejected' ? 'rejected' : 'invite';
+
+  const heartIcon = profile.status === 'accepted' ? '❤️'
+                    : profile.status === 'rejected' ? '💔' : '💌';
+
+  const message = profile.status === 'accepted' ? 'Request Accepted'
+                 : profile.status === 'rejected' ? 'Request Rejected'
+                 : 'Sent you an Invite';
+
+  notif.innerHTML = `
+    <img src="${profile.image}" alt="Profile">
+    <div class="info">
+      <h4>${profile.name}</h4>
+      <p>${message}</p>
+    </div>
+    <div class="heart ${heartClass}">${heartIcon}</div>
+  `;
+
+  container.prepend(notif); // Show at top
+
+  // Auto-remove after 4 seconds
+  setTimeout(() => {
+    notif.style.opacity = '0';
+    notif.style.transform = 'translateX(120%)';
+    setTimeout(() => notif.remove(), 400);
+  }, 4000);
+}
+
+// Sample profiles
+const demoProfiles = [
+  {
+    name: "Ayesha",
+    image: "https://randomuser.me/api/portraits/women/75.jpg",
+    status: "accepted"
+  },
+  {
+    name: "Raj",
+    image: "https://randomuser.me/api/portraits/men/41.jpg",
+    status: "rejected"
+  },
+  {
+    name: "Meera",
+    image: "https://randomuser.me/api/portraits/women/32.jpg",
+    status: "invite"
+  },
+  {
+    name: "Zara",
+    image: "https://randomuser.me/api/portraits/women/22.jpg",
+    status: "accepted"
+  }
+];
+
+// Show each notification with delay
+demoProfiles.forEach((profile, index) => {
+  setTimeout(() => showNotification(profile), index * 1000);
+});
+</script> -->
+      <!-- ye right side s pop up k lie script add kia hai --> 
+</body>
+</html>

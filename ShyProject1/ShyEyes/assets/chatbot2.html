@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7d7e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 10px;
+}
+
+.chat-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  height: 95vh; /* 👈 Change this */
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 👈 This line is important */
+  overflow: hidden; /* 👈 Prevents overflow outside */
+}
+
+
+.chat-header {
+  background-color: #f65595;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header .user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.chat-header .icons i {
+  color: white;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  background-color: #fff3f3;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.chat-footer {
+  display: flex;
+  padding: 10px 15px;
+  background: #f0f0f0;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.chat-footer button {
+  background-color: #f65595;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.receiver-thinking {
+  background-image: linear-gradient(-20deg, #fadef1 0%, #f895ca 100%);
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: fit-content;
+  color: #444;
+  position: relative;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.receiver-msg {
+  align-self: flex-start !important;
+  background-color: #fafbfd !important;
+  padding: 10px 15px;
+  border-radius: 10px 10px 10px 0;
+  max-width: 75%;
+  color: #111 !important;
+  font-size: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background-color: #fcabb8;
+  padding: 10px 15px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 75%;
+  font-size: 14px;
+  color: #111;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+.dots {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.dots span {
+  height: 6px;
+  width: 6px;
+  background-color: #444;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1s infinite ease-in-out;
+  margin: 0 2px;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-img {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.user-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #06c633;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.message-row.receiver {
+  justify-content: flex-start;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chat-wrapper {
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .chat-footer input {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .chat-footer button {
+    padding: 8px 10px;
+  }
+
+  .chat-header strong {
+    font-size: 16px;
+  }
+
+  .chat-header small {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .chat-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chat-footer input {
+    width: 100%;
+  }
+
+  .chat-footer button {
+    align-self: flex-end;
+  }
+}
+
+
+
+
+    /* Heart Animation Styles */
+    #hearts {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+ 
+    .heart {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #f95872;
+      transform: rotate(45deg);
+      animation: floatUp 7s linear infinite;
+      opacity: 0.8;
+    }
+ 
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #f95872;
+      border-radius: 50%;
+    }
+ 
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+ 
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+ 
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+
+    
+
+    /* Heart Animation Styles */
+    #hearts {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+ 
+    .heart {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #f95872;
+      transform: rotate(45deg);
+      animation: floatUp 7s linear infinite;
+      opacity: 0.8;
+    }
+ 
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #f95872;
+      border-radius: 50%;
+    }
+ 
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+ 
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+ 
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+
+  .chat-footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #f0f0f0;
+    gap: 8px;
+  }
+  .chat-footer input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  .icon-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #f65595;
+    cursor: pointer;
+  }
+  .chat-footer button {
+    background-color: #f65595;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .sent-image {
+    max-width: 200px;
+    border-radius: 10px;
+    display: block;
+  }
+
+</style>
+
+</head>
+
+<body>
+
+
+ <div class="chat-wrapper">
+    <!-- Sidebar -->
+   
+ 
+    <!-- Main Chat -->
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="user">
+  <div class="user-img">
+    <img src="https://randomuser.me/api/portraits/men/52.jpg" />
+    <span class="online-dot"></span>
+  </div>
+  <div>
+    <strong>Shreyu N</strong><br />
+    <small class="text-white">Online</small>
+  </div>
+
+
+  
+</div>
+ 
+        <div class="icons">
+          <i class="fas fa-phone me-3"   onclick="handleAudioClick()"></i>
+          <i class="fas fa-video me-3"   onclick="handleVedioClick()"></i>
+         
+        </div>
+      </div>
+     <div class="chat-body" id="chatBody"></div>
+        <!-- Receiver message example -->
+ 
+
+      </div>
+
+
+
+ <!-- Chat Footer -->
+<div class="chat-footer">
+  <label for="cameraInput" class="icon-btn">
+    <i class="fas fa-camera"></i>
+  </label>
+  <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+
+  <label for="galleryInput" class="icon-btn">
+    <i class="fas fa-image"></i>
+  </label>
+  <input type="file" id="galleryInput" accept="image/*" style="display:none">
+
+  <button type="button" id="emojiBtn" class="icon-btn">
+    <i class="fas fa-smile"></i>
+  </button>
+
+  <input type="text" placeholder="Enter your text" id="chatInput"/>
+  <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+</div>
+
+
+    </div>
+ 
+   
+  </div>
+
+
+<!-- Sound Effects --><!-- Audio Files -->
+<audio id="sendSound" src="/ShyEyes/assets/audio/mixkit-correct-answer-tone-2870.wav" preload="auto"></audio>
+<audio id="receiveSound" src="/ShyEyes/assets/audio/Nada Dering Sms Iphone Ringtone Download - MobCup.Com.Co.mp3" preload="auto"></audio>
+
+<!-- <script>
+  const input = document.querySelector('.chat-footer input');
+  const button = document.querySelector('.chat-footer button');
+  const chatBody = document.getElementById('chatBody');
+  const sendSound = document.getElementById('sendSound');
+  const receiveSound = document.getElementById('receiveSound');
+
+  function sendMessage() {
+    const originalMsg = input.value.trim();
+    if (originalMsg === '') return;
+
+    // Play send sound
+    sendSound.currentTime = 0;
+    sendSound.play().catch(err => console.log("Send sound blocked:", err));
+
+    const userRow = document.createElement('div');
+    userRow.className = 'message-row user';
+    userRow.innerHTML = `
+      <div class="user-msg">${originalMsg}</div>
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-pic" />
+    `;
+    chatBody.appendChild(userRow);
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    const thinking = document.createElement('div');
+    thinking.className = 'receiver-thinking';
+    thinking.innerHTML = 'Shreyu is typing <span class="dots"><span></span><span></span><span></span></span>';
+    chatBody.appendChild(thinking);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    setTimeout(() => {
+      thinking.remove();
+
+      const receiverRow = document.createElement('div');
+      receiverRow.className = 'message-row receiver';
+      receiverRow.innerHTML = `
+        <img src="https://randomuser.me/api/portraits/men/52.jpg" class="profile-pic" />
+        <div class="receiver-msg">Hii</div> 
+      `;
+      chatBody.appendChild(receiverRow);
+
+      // Play receive sound
+      receiveSound.currentTime = 0;
+      receiveSound.play().catch(err => console.log("Receive sound blocked:", err));
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 1500);
+  }
+
+  button.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+
+
+// Floating hearts
+    const heartContainer = document.getElementById("hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.animationDuration = (Math.random() * 5 + 3) + "s";
+      heartContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 500);
+
+
+
+
+</script> -->
+
+
+
+
+
+
+
+
+
+<script>
+const input = document.getElementById('chatInput');
+const button = document.getElementById('sendBtn');
+const chatBody = document.getElementById('chatBody');
+const sendSound = document.getElementById('sendSound');
+const receiveSound = document.getElementById('receiveSound');
+
+// 📷 कैमरा
+document.getElementById('cameraInput').addEventListener('change', function(e){
+  handleImageSend(e.target.files[0]);
+});
+
+// 🖼 गैलरी
+document.getElementById('galleryInput').addEventListener('change', function(e){
+  handleImageSend(e.target.files[0]);
+});
+
+// 😊 इमोजी बटन (डेमो)
+document.getElementById('emojiBtn').addEventListener('click', function(){
+  alert('Emoji picker open here!');
+});
+
+function sendMessage() {
+  const originalMsg = input.value.trim();
+  if (originalMsg === '') return;
+
+  sendSound.currentTime = 0;
+  sendSound.play().catch(()=>{});
+
+  const userRow = document.createElement('div');
+  userRow.className = 'message-row user';
+  userRow.innerHTML = `
+    <div class="user-msg">${originalMsg}</div>
+    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-pic" />
+  `;
+  chatBody.appendChild(userRow);
+  input.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  setTimeout(simulateReply, 1500);
+}
+
+function handleImageSend(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const imgSrc = e.target.result;
+    const userRow = document.createElement('div');
+    userRow.className = 'message-row user';
+    userRow.innerHTML = `
+      <div class="user-msg"><img src="${imgSrc}" class="sent-image"></div>
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-pic" />
+    `;
+    chatBody.appendChild(userRow);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    sendSound.play().catch(()=>{});
+    setTimeout(simulateReply, 1500);
+  }
+  reader.readAsDataURL(file);
+}
+
+function simulateReply(){
+  const receiverRow = document.createElement('div');
+  receiverRow.className = 'message-row receiver';
+  receiverRow.innerHTML = `
+    <img src="https://randomuser.me/api/portraits/men/52.jpg" class="profile-pic" />
+    <div class="receiver-msg">Hii</div>
+  `;
+  chatBody.appendChild(receiverRow);
+  receiveSound.play().catch(()=>{});
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+button.addEventListener('click', sendMessage);
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- x-icon -->
+    <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<!-- for subscription -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+<!-- add button script link -->
+
+ 
+<!-- for subscription 
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+close link button script -->
+
+
+    <!-- Other css -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/icofont.min.css">
+    <link rel="stylesheet" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <title>SHY-EYES – Profile | Find Your Perfect Match</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  
+  
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+<!-- Service CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+
+  <style>
+body {
+  
+    margin: 0;
+    background-color: #fff5f7;
+}
+
+/* -------- SECTION 1: ABOUT -------- */
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 8%;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.images-wrapper {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.images img {
+    width: 260px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 50% / 15%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+.images img:hover { transform: scale(1.03); }
+
+.badge {
+    position: absolute;
+    background-color: #f93d66;
+    color: white;
+    padding: 15px 25px;
+    /* font-weight: bold; */
+    width: 300px;
+    height: 100px;
+    border-radius: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    z-index: 2;
+    opacity: 0;
+}
+.badge.show { animation: popIn 0.8s ease-out forwards; }
+
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.text { max-width: 500px; }
+.text h4 {
+    color: #f93d66;
+    /* font-family: 'Playfair Display', serif; */
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.text h2 {
+    font-size: 36px;
+    color: #252525;
+    /* font-family: 'Playfair Display', serif; */
+    margin-bottom: 20px;
+}
+.text p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.features li {
+    margin-bottom: 10px;
+    color: #f93d66;
+    font-weight: 500;
+}
+.features li i { margin-right: 8px; }
+button {
+    background-color: #f93d66;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+button:hover { background-color: #d92b53; }
+
+/* -------- SECTION 2: HEX STATS -------- */
+.stats-section {
+    position: relative;
+    padding: 60px 8%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    background-color: rgb(255, 237, 241) !important;
+}
+
+
+/* overlay for better text visibility */
+.stats-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(192, 190, 190, 0.4); /* हल्का dark overlay */
+    z-index: 0;
+}
+
+.stat-box {
+    position: relative;
+    z-index: 1; /* overlay के ऊपर content */
+    background: rgba(249, 61, 102, 0.95);
+    width: 260px;
+    aspect-ratio: 1 / 1;
+    clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.stat-box:hover { transform: scale(1.05); }
+.stat-box i {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+.stat-box h3 {
+    font-size: 26px;
+    margin: 0;
+    color: #fefafc;
+}
+.stat-box p {
+    /* font-family: 'Playfair Display', serif; */
+    font-size: 16px;
+    margin: 0;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 992px) {
+    .section { flex-direction: column; padding: 50px 5%; text-align: center; }
+    .text { max-width: 100%; }
+    .images img { width: 220px; height: 320px; }
+}
+@media (max-width: 576px) {
+    .images img { width: 180px; height: 260px; }
+    .badge { font-size: 14px; padding: 8px 15px; }
+    .text h2 { font-size: 26px; }
+    .text p { font-size: 14px; }
+    button { padding: 10px 20px; font-size: 14px; }
+    .stat-box { width: 160px; }
+}
+
+
+/* Services Section */
+.services-slider-section {
+  padding: 60px 5%;
+  background: #fff5f7;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-img img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 30px 30px 0 0; /* Top curve */
+}
+
+.service-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.service-content .icon img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.service-content h3 {
+  font-size: 20px;
+  color: #2b0035;
+  margin-bottom: 10px;
+}
+
+.service-content p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #f93d66;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #d92b53;
+}
+
+
+
+
+
+/* section 4 */
+:root {
+  --expertise-max-width: 1400px; /* poore section ki max width */
+  --expertise-min-height: 380px; /* desktop par min height */
+  --expertise-text-padding: 40px; /* text side ka padding */
+}
+
+/* .our-expertise-duplicate-overlay {
+  font-family: 'Playfair Display', serif;
+} */
+
+.expertise-container {
+  display: flex;
+  align-items: stretch;
+  max-width: var(--expertise-max-width);
+  margin: auto;
+  min-height: var(--expertise-min-height);
+ 
+}
+
+.expertise-text {
+  flex: 1;
+  color: #fff;
+  padding: var(--expertise-text-padding);
+  background: rgba(80, 79, 79, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.expertise-text .subtitle {
+  font-size: 1rem;
+  color: #8f0332;
+  margin-bottom: 8px;
+}
+.expertise-text .title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.expertise-text .description {
+  color: #ddd;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.progress-item {
+  margin-bottom: 15px;
+}
+.progress-item span {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.progress-item .percent {
+  float: right;
+}
+.progress-bar {
+  height: 6px;
+  background: #ddd;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.progress-fill {
+  height: 100%;
+  background: #e91e63;
+}
+
+.expertise-image {
+  flex: 1;
+  overflow: hidden;
+}
+.expertise-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
+  .expertise-container {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .expertise-text {
+    padding: 20px 15px;
+  }
+  .expertise-image img {
+    height: auto;
+  }
+  .progress-item .percent {
+    float: none;
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+
+  @media(max-width: 700px) {
+    .banner {
+      padding-left: 20px;
+      height: auto;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+  }
+
+
+</style>
+
+</head>
+
+<body>
+
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <dotlottie-wc src="https://lottie.host/8d6af0b2-23e7-46ba-a471-679685df0972/nYaMcOGKyJ.lottie"
+                style="width: 200px; height: 200px" speed="1" autoplay loop></dotlottie-wc>
+        </div>
+    </div>
+    <!-- preloader ending here -->
+
+
+    <!-- ==========Header Section Starts Here========== -->
+    <header class="header-section">
+
+
+        <!-- topbar -->
+        
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-area">
+                    <ul class="left">
+                        <li>
+                            <i class="icofont-ui-call"></i> <span>+00000000</span>
+                        </li>
+                        <li>
+                            <i class="icofont-location-pin"></i> Noida, Greater Noida
+                        </li>
+                    </ul>
+                    <ul class="social-icons d-flex align-items-center">
+                        <li>
+                            <p>
+                                Find us on :
+                            </p>
+                        </li>
+                        <li>
+                            <a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="vimeo"><i class="icofont-vimeo"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="skype"><i class="icofont-skype"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="rss"><i class="icofont-rss-feed"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+<!-- navbar -->
+
+ <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/logo/shylogo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="menu-area">
+                        <ul class="menu">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                             <li>
+                                <a href="">About Us</a>
+                            </li>
+
+                            <li>
+                                <a href="#0">Features</a>
+                                <ul class="submenu">
+                                    
+                                    <li><a href="members.html">All Members</a></li>
+                                      <li><a href="profile2.html">profiles</a></li>
+                                    <li><a href="profile.html">Member Profile</a></li>
+
+                                    <!-- <li><a href="login.html">Login</a></li>
+                                    <li><a href="signup.html">Sign Up</a></li> -->
+                                    <li><a href="pricing-plan.html">Pricing Plan</a></li>
+                                    <!-- <li><a href="404.html">404 Page</a></li> -->
+
+                                </ul>
+                            </li>
+                          
+                            
+                            <li>
+                                <a href="#0">Blog</a>
+                                <ul class="submenu">
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="blog-single.html">Blog Single</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                        <a href="login.html" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
+                        <a href="register.html" class="signup"><i class="icofont-users"></i> <span>REGISTER</span> </a>
+
+                        <!-- toggle icons -->
+                        <div class="header-bar d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="ellepsis-bar d-lg-none">
+                            <i class="icofont-info-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- ==========Header Section Ends Here========== -->
+
+    <!-- ==========Page Header Section Start Here========== -->
+    <section class="page-header-section style-1 bg-pink">
+
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-inner">
+                    <div class="page-title">
+                        <h2>About Us</h2>
+                    </div>
+                    <ol class="breadcrumb">
+                        <li><a href="index2.html">Home</a></li>
+                        <li class="active">About Us</li>
+                    </ol>
+                  </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ==========Page Header Section Ends Here========== -->
+
+<!-- SECTION 1: ABOUT -->
+<section class="section">
+    <div class="images-wrapper" data-aos="fade-right" id="images-section">
+        <div class="images">
+            <img src="assets/images/story11.webp" alt="Dating Couple">
+            <img src="assets/images/Story7.avif" alt="Romantic Moment">
+        </div>
+        <div class="badge" id="experience-badge">
+            <i class="fa-solid fa-heart"></i> 15+ Years of Love Connections
+        </div>
+    </div>
+
+    <div class="text" data-aos="fade-left">
+        <h4><i class="fa-solid fa-heart"></i> About Shy-Eye</h4>
+        <h2>Where Love Finds You</h2>
+        <p>At Shy-Eye, we believe love can bloom anywhere — all it takes is the right spark.  
+        With years of experience helping shy hearts connect, we create opportunities for meaningful relationships that last a lifetime.</p>
+
+        <ul class="features">
+            <li><i class="fa-solid fa-heart"></i> Personalized Matchmaking</li>
+            <li><i class="fa-solid fa-heart"></i> Safe & Private Connections</li>
+            <li><i class="fa-solid fa-heart"></i> Real People, Real Love</li>
+            <li><i class="fa-solid fa-heart"></i> Global Community</li>
+        </ul>
+
+        <button>JOIN NOW</button>
+    </div>
+</section>
+
+<!-- SECTION 2: STATS -->
+<section class="stats-section" data-aos="fade-up" >
+    <div class="stat-box">
+        <i class="fa-solid fa-user-plus"></i>
+        <h3>5,000+</h3>
+        <p>Connections Made</p>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-heart"></i>
+        <h3>3,200+</h3>
+        <p>Happy Couples</p>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h3>15+</h3>
+        <p>Years in Love Business</p>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-globe"></i>
+        <h3>50+</h3>
+        <p>Countries Served</p>
+    </div>
+</section>
+
+
+<!-- Service Section -->'
+ 
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({ duration: 1200, once: true });
+
+const section = document.getElementById('images-section');
+const badge = document.getElementById('experience-badge');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      badge.classList.add('show');
+    }
+  });
+}, { threshold: 0.5 });
+
+observer.observe(section);
+
+
+</script>
+
+<!-- Section 4 -->
+
+<section class="our-expertise-duplicate-overlay">
+  <div class="expertise-container">
+    <div class="expertise-text" style="background-color: #f4e7ed !important;">
+      <h4 class="subtitle">Our Expertise</h4>
+      <h2 class="title" style="color: rgb(58, 57, 57);">Building Meaningful Connections with Care & Expertise</h2>
+      <p class="description" style="color: #555;">
+        At HeartMatch, we specialize in creating genuine connections that turn into lasting relationships. 
+        Our platform blends technology with a personal touch to make finding your perfect match exciting, safe, 
+        and tailored to your preferences.
+      </p>
+      <div class="progress-item">
+        <span style="color: #323232;">Match Accuracy</span><span class="percent" style="color: #323232;">92%</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:92%;"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <span style="color: #323232;">Profile Verification</span><span class="percent" style="color: #323232;">97%</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:97%;"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <span style="color: #323232;">User Engagement</span><span class="percent" style="color: #323232;">89%</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:89%;"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <span style="color: #323232;">Success Stories</span><span class="percent" style="color: #323232;">95%</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:95%;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="expertise-image">
+      <img src="assets/images/Story5.avif" alt="Happy Couple on a Date">
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- ================ footer Section start Here =============== -->
+    <footer class="footer-section">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-3 justify-content-center g-lg-0">
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="footer-top-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/footer/icons/01.png" alt="Phone-icon">
+                                </div>
+                                <div class="lab-content">
+                                    <span>Phone Number : +00000000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="footer-top-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/footer/icons/02.png" alt="email-icon">
+                                </div>
+                                <div class="lab-content">
+                                    <span>Email : admin@shyeyes.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="footer-top-item lab-item">
+                            <div class="lab-inner">
+                                <div class="lab-thumb">
+                                    <img src="assets/images/footer/icons/03.png" alt="location-icon">
+                                </div>
+                                <div class="lab-content">
+                                    <span>Address : noida, Greater Noida</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-middle padding-tb" style="background-image: url(assets/images/footer/bg.png);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="footer-middle-item-wrapper">
+                            <div class="footer-middle-item mb-lg-0">
+                                <div class="fm-item-title">
+                                    <h4>About SHY-EYES</h4>
+                                </div>
+                                <div class="fm-item-content">
+                                    <p class="mb-4">Energistically coordinate highly efficient procesr
+                                        partnerships befor revolutionar growth strategie
+                                        improvement viaing awesome</p>
+                                    <img src="assets/images/footer/about.jpg" alt="about-image" class="footer-abt-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="footer-middle-item-wrapper">
+                            <div class="footer-middle-item mb-lg-0">
+                                <div class="fm-item-title">
+                                    <h4>our Recent news</h4>
+                                </div>
+                                <div class="fm-item-content">
+                                    <div class="fm-item-widget lab-item">
+                                        <div class="lab-inner">
+                                            <div class="lab-thumb">
+                                                <a href="#"> <img src="assets/images/footer/01.jpg"
+                                                        alt="footer-widget-img"></a>
+                                            </div>
+                                            <div class="lab-content">
+                                                <h6><a href="blog-single.html">Enable Seamin Matera Forin And Our
+                                                        Orthonal Create Vortals.</a></h6>
+                                                <p>July 23, 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fm-item-widget lab-item">
+                                        <div class="lab-inner">
+                                            <div class="lab-thumb">
+                                                <a href="#"><img src="assets/images/footer/02.jpg"
+                                                        alt="footer-widget-img"></a>
+                                            </div>
+                                            <div class="lab-content">
+                                                <h6><a href="blog-single.html">Dynamca Network Otuitive Catays For
+                                                        Plagiarize Mindshare After</a></h6>
+                                                <p>July 23, 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fm-item-widget lab-item">
+                                        <div class="lab-inner">
+                                            <div class="lab-thumb">
+                                                <a href="#"><img src="assets/images/footer/03.jpg"
+                                                        alt="footer-widget-img"></a>
+                                            </div>
+                                            <div class="lab-content">
+                                                <h6><a href="blog-single.html">Dynamca Network Otuitive Catays For
+                                                        Plagiarize Mindshare After</a></h6>
+                                                <p>July 23, 2021</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="footer-middle-item-wrapper">
+                            <div class="footer-middle-item-3 mb-lg-0">
+                                <div class="fm-item-title">
+                                    <h4>Our Newsletter Signup</h4>
+                                </div>
+                                <div class="fm-item-content">
+                                    <p>By subscribing to our mailing list you will always
+                                        be update with the latest news from us.</p>
+                                    <form>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Enter email">
+                                        </div>
+                                        <button type="submit" class="lab-btn">Send Massage <i
+                                                class="icofont-paper-plane"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-bottom-content text-center">
+                            <p>&copy; 2025 <a href="index.html">SHY-EYES</a> — India’s Most Trusted Dating Platform.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ================ footer Section end Here =============== -->
+
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+
+    <!-- All Scripts -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/swiper.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/functions.js"></script>
+
+
+</body>
+</html>

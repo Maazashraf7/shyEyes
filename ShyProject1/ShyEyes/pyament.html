@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color:   #fff3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+ 
+    .payment-container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+ 
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+ 
+    .qr-image {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+    }
+ 
+    .confirm-btn {
+      margin-top: 25px;
+      background-color: #df314d;
+      border: none;
+      padding: 12px 24px;
+      color: white;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+ 
+    .confirm-btn:hover {
+      background-color: #fbfdfc;
+      border: 1px solid #df314d;;
+      color: black;
+    }
+ 
+    .plan-name {
+      font-weight: bold;
+      font-size: 20px;
+      color: #df314d;
+    }
+  </style>
+
+
+</head>
+<body>
+
+  
+ 
+  <div class="payment-container">
+    <h2>Scan & Pay for <span class="plan-name" id="planName">...</span></h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=demo@upi&pn=DemoUser" alt="QR Code" class="qr-image">
+   
+    <p><strong>UPI:</strong> demo@upi<br>Use any UPI app to pay</p>
+   
+    <button class="confirm-btn" onclick="confirmPayment()">I've Paid</button>
+  </div>
+ 
+  <script>
+    const selectedPlan = localStorage.getItem('selectedPlan');
+    document.getElementById("planName").textContent = selectedPlan + " Plan";
+ 
+    function confirmPayment() {
+      if (selectedPlan) {
+        // Store subscription in localStorage for now (in real use: update MongoDB from backend)
+        localStorage.setItem('userSubscription', selectedPlan);
+        alert("Payment successful! You now have access to " + selectedPlan + " features.");
+        // Redirect to chat or dashboard
+        window.location.href = "/ShyEyes/profile.html"; // or "/chat" if backend route is protected
+      }
+    }
+  </script>
+ 
+</body>
+</html> 
+

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dating Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: #ffe6eb;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 25%;
+      background: #fff;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+    }
+    .chat-area {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      background: #fce4ec;
+    }
+    .chat-header {
+      background: #ec407a;
+      color: #fff;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chat-header .left {
+      display: flex;
+      align-items: center;
+    }
+    .chat-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .chat-header .icons i {
+      margin-left: 15px;
+      cursor: pointer;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #fff0f5;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      background: #ffccda;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      max-width: 60%;
+    }
+    .agent {
+      background: #e1bee7;
+      align-self: flex-start;
+    }
+    .user {
+      background: #c5e1a5;
+      align-self: flex-end;
+    }
+    .chat-input {
+      padding: 15px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+    }
+    .chat-input button {
+      background: #ec407a;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .contact {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+    .contact img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .contact:hover {
+      background: #fff0f5;
+    }
+    .emoji-picker {
+      font-size: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    /* Profile Modal */
+    #profileModal {
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 10;
+      align-items:center;
+      justify-content:center;
+    }
+    #profileModal .modal-content {
+      background:#fff0f5;
+      padding:30px;
+      border-radius:15px;
+      max-width:400px;
+      width:90%;
+      text-align:center;
+      position:relative;
+    }
+    #profileModal .modal-content img {
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      border:5px solid #ff99cc;
+      margin-bottom:15px;
+    }
+    #profileModal .modal-content h2 {
+      color:#c2185b;
+    }
+    #profileModal .modal-content p {
+      margin:8px 0;
+    }
+    #profileModal .modal-content span.close {
+      position:absolute;
+      top:10px;
+      right:15px;
+      cursor:pointer;
+      font-size:18px;
+    }
+  </style>
+
+
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+  <div class="sidebar">
+    <div style="padding: 10px;">
+      <input type="text" id="searchInput" placeholder="Search..." oninput="filterContacts()" style="width: 100%; padding: 8px; border-radius: 20px; border: 1px solid #ccc;" />
+    </div>
+    <div id="contact-list"></div>
+  </div>
+  <div class="chat-area">
+    <div class="chat-header">
+      <div class="left">
+        <img id="chatHeaderImg" src="https://i.pravatar.cc/40?img=1" alt="agent" onclick="showProfile(currentUser)">
+        <span id="chatHeaderName">LoveBot 💘</span>
+      </div>
+      <div class="icons">
+        <i class="fas fa-phone"></i>
+        <i class="fas fa-video"></i>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-box">
+      <div class="message agent">Hi! I'm LoveBot. How can I help you today? ❤️</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type a message..." onkeydown="handleKey(event)" />
+      <span class="emoji-picker" onclick="insertEmoji('😍')">😍</span>
+      <span class="emoji-picker" onclick="insertEmoji('😂')">😂</span>
+      <span class="emoji-picker" onclick="insertEmoji('😘')">😘</span>
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+<!-- Profile Modal -->
+<div id="profileModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeProfile()">❌</span>
+    <img id="profileImg" src="" />
+    <h2 id="profileName"></h2>
+    <p><strong>📍 Location:</strong> <span id="profileLocation"></span></p>
+    <p><strong>🎂 Age:</strong> <span id="profileAge"></span></p>
+    <p><strong>📝 About:</strong> <span id="profileAbout"></span></p>
+  </div>
+</div>
+
+
+
+
+<!-- Sound Effects -->
+<audio id="sendSound" src="assets/audio/mixkit-correct-answer-tone-2870.wav" preload="auto"></audio>
+<audio id="receiveSound" src="assets/audio/Nada Dering Sms Iphone Ringtone Download - MobCup.Com.Co.mp3" preload="auto"></audio>
+
+
+
+
+<script>
+  const names = ["Aarav", "Aisha", "Vivaan", "Kiara", "Reyansh", "Meera", "Arjun", "Tara", "Krishna", "Anaya", "Rohan", "Ira", "Kabir", "Saanvi", "Yash", "Zoya"];
+  const locations = ["Delhi", "Mumbai", "Bangalore", "Kolkata", "Jaipur", "Pune", "Hyderabad"];
+  const abouts = [
+    "Love music & travel 🎶✈️",
+    "Looking for something real ❤️",
+    "Coffee addict ☕ and bookworm 📚",
+    "Adventure lover 🌍",
+    "Dog person 🐶, no doubt!",
+    "Let’s vibe together 💫",
+    "Flirty but loyal 😉"
+  ];
+  let currentUser = 1;
+  const contactList = document.getElementById("contact-list");
+  const chatBox = document.getElementById("chat-box");
+  for (let i = 1; i <= 30; i++) {
+    const name = names[i % names.length];
+    const contact = document.createElement("div");
+    contact.className = "contact";
+    contact.onclick = () => openChat(i);
+    contact.innerHTML = `
+      <img src="https://i.pravatar.cc/150?img=${i}" alt="user" onclick="event.stopPropagation(); showProfile(${i})" />
+      <span>${name}</span>
+    `;
+    contactList.appendChild(contact);
+  }
+  function openChat(index) {
+    currentUser = index;
+    const name = names[index % names.length];
+    document.getElementById("chatHeaderImg").src = `https://i.pravatar.cc/40?img=${index}`;
+    document.getElementById("chatHeaderName").innerText = name;
+    chatBox.innerHTML = `<div class="message agent">Hi! I'm ${name}. Nice to meet you! 💕</div>`;
+  }
+  function sendMessage() {
+    const input = document.getElementById("messageInput");
+    const msg = input.value.trim();
+    if (msg === "") return;
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.textContent = msg;
+    chatBox.appendChild(userMsg);
+    setTimeout(() => {
+      const reply = document.createElement("div");
+      reply.className = "message agent";
+      reply.textContent = generateReply(msg);
+      chatBox.appendChild(reply);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
+    input.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+  function insertEmoji(emoji) {
+    const input = document.getElementById("messageInput");
+    const start = input.selectionStart;
+    const end = input.selectionEnd;
+    const text = input.value;
+    input.value = text.substring(0, start) + emoji + text.substring(end);
+    input.focus();
+    input.selectionStart = input.selectionEnd = start + emoji.length;
+  }
+  function handleKey(e) {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  }
+  function generateReply(msg) {
+    const replies = [
+      "That's cute! 💕",
+      "Tell me more 😍",
+      "You're interesting! ✨",
+      "Haha I like that 😄",
+      "So sweet of you! 🌸"
+    ];
+    return replies[Math.floor(Math.random() * replies.length)];
+  }
+  function showProfile(index) {
+    document.getElementById("profileImg").src = `https://i.pravatar.cc/150?img=${index}`;
+    document.getElementById("profileName").innerText = names[index % names.length];
+    document.getElementById("profileLocation").innerText = locations[index % locations.length];
+    document.getElementById("profileAge").innerText = 20 + (index % 10);
+    document.getElementById("profileAbout").innerText = abouts[index % abouts.length];
+    document.getElementById("profileModal").style.display = "flex";
+  }
+  function closeProfile() {
+    document.getElementById("profileModal").style.display = "none";
+  }
+  function filterContacts() {
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const contacts = document.querySelectorAll(".contact");
+    contacts.forEach(contact => {
+      const name = contact.textContent.toLowerCase();
+      contact.style.display = name.includes(searchTerm) ? "flex" : "none";
+    });
+  }
+
+
+
+  
+// sound script to both side 
+
+function sendMessage() {
+  const input = document.getElementById("messageInput");
+  const msg = input.value.trim();
+  if (msg === "") return;
+
+  // Play send sound
+  document.getElementById("sendSound").play();
+
+  const userMsg = document.createElement("div");
+  userMsg.className = "message user";
+  userMsg.textContent = msg;
+  chatBox.appendChild(userMsg);
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  setTimeout(() => {
+    const reply = document.createElement("div");
+    reply.className = "message agent";
+    reply.textContent = generateReply(msg);
+    chatBox.appendChild(reply);
+
+    // Play receive sound
+    document.getElementById("receiveSound").play();
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 1000);
+}
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

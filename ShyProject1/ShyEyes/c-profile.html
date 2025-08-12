@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffe6eb, #fff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .profile-container {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 750px;
+      width: 95%;
+      text-align: center;
+    }
+
+    h2 {
+      color: #f95872;
+    }
+
+    .profile-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .profile-images img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #f95872;
+    }
+
+    .profile-info {
+      text-align: left;
+    }
+
+    .profile-info p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      border: none;
+      background: #f95872;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .buttons button:hover {
+      background: #d74662;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <h2>Your Profile</h2>
+    <div class="profile-images" id="profile-images"></div>
+    <div class="profile-info" id="profile-info"></div>
+    <div class="buttons">
+      <button onclick="editProfile()">✏️ Edit Profile</button>
+    </div>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("userProfile"));
+
+    if (!data) {
+      document.body.innerHTML = "<h2 style='text-align:center;'>No Profile Found</h2>";
+    } else {
+      const imagesContainer = document.getElementById("profile-images");
+      const infoContainer = document.getElementById("profile-info");
+
+      if (data.images && data.images.length > 0) {
+        data.images.forEach(src => {
+          const img = document.createElement("img");
+          img.src = src;
+          imagesContainer.appendChild(img);
+        });
+      }
+
+      infoContainer.innerHTML = `
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Age:</strong> ${data.age}</p>
+        <p><strong>Gender:</strong> ${data.gender}</p>
+        <p><strong>Location:</strong> ${data.location}</p>
+        <p><strong>Date of Birth:</strong> ${data.dob || "Not Provided"}</p>
+        <p><strong>About:</strong> ${data.about || "Not Provided"}</p>
+      `;
+    }
+
+    function editProfile() {
+      window.location.href = "edit-profile.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Shy Eyes</title>
+  <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+    }
+
+    .login-container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+
+    .login-left {
+      flex: 1;
+      padding: 40px;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #fcf3f9;
+    }
+
+    .logo {
+      
+    width: 150px;
+    margin-bottom: 38px;
+
+    }
+
+    .login-left h2 {
+      font-size: 22px;
+      color: #e1419c;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .login-left p {
+      margin-bottom: 30px;
+      color: #7a7a7a;
+      font-size: 15px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    form input[type="text"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      transition: border 0.3s ease;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="password"]:focus {
+      border: 1px solid #e91e63;
+      outline: none;
+    }
+
+    .password-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
+
+    .password-wrap .forgot {
+      font-size: 13px;
+      color: #346ebf;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .remember-wrap {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .remember-wrap input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #7d82f6;
+      color: white;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .login-btn:hover {
+      background-color: #f677d2;
+    }
+
+    .login-right {
+      flex: 1.2;
+      position: relative;
+      background: url('img/banner4.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .login-right .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .overlay-content {
+      position: relative;
+      z-index: 2;
+      padding: 40px;
+      color: white;
+      max-width: 400px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Forgot Password Modal */
+    .forgot-modal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 10000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .forgot-modal.active {
+      display: flex;
+    }
+
+    .forgot-content {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .forgot-content h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #e1419c;
+    }
+
+    .forgot-content p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .forgot-content input {
+      width: 100%;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .send-btn, .cancel-btn {
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .send-btn {
+      background-color: #7d82f6;
+      color: white;
+    }
+
+    .send-btn:hover {
+      background-color: #6a6ee5;
+    }
+
+    .cancel-btn {
+      background-color: #ccc;
+      color: #333;
+    }
+
+    .cancel-btn:hover {
+      background-color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-left">
+      <img src="assests/img/SHY-EYES.png" alt="Shy-Eyes Logo" class="logo" />
+      <h2>User Login</h2>
+      <p>Enter your User Id and password to access account.</p>
+      <form onsubmit="redirectToChat(event)">
+        <label>Name</label>
+        <input type="text" placeholder="Enter your Name ID" required />
+        
+        <label>Employee ID</label>
+        <input type="text" placeholder="Enter your Employee ID" required />
+        
+        <div class="password-wrap">
+          <label>Password</label>
+          <a href="#" class="forgot">Forgot your password?</a>
+        </div>
+        <input type="password" placeholder="Enter your password" required />
+        
+        <div class="remember-wrap">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember me</label>
+        </div>
+        
+        <button type="submit" class="login-btn">🔐 Log In</button>
+      </form>
+    </div>
+
+    <div class="login-right">
+      <div class="overlay"></div>
+      <div class="overlay-content"></div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="forgot-modal" id="forgotModal">
+    <div class="forgot-content">
+      <h3>Reset Your Password</h3>
+      <p>Enter your User ID or Email to receive a reset link.</p>
+      <input type="text" placeholder="Enter your User ID or Email" id="resetInput" />
+      <div class="modal-actions">
+        <button class="send-btn">Send Reset Link</button>
+        <button class="cancel-btn" onclick="closeForgotModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function redirectToChat(event) {
+      event.preventDefault();
+      window.location.href = "/customer-care.html"; // Replace this with your destination page
+    }
+
+    // Open forgot password modal
+    document.querySelector('.forgot').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('forgotModal').classList.add('active');
+    });
+
+    // Close modal
+    function closeForgotModal() {
+      document.getElementById('forgotModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

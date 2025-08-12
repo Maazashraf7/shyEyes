@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7d7e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 10px;
+}
+
+.chat-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  height: 95vh; /* 👈 Change this */
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 👈 This line is important */
+  overflow: hidden; /* 👈 Prevents overflow outside */
+}
+
+
+.chat-header {
+  background-color: #f65595;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header .user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.chat-header .icons i {
+  color: white;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  background-color: #fff3f3;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.chat-footer {
+  display: flex;
+  padding: 10px 15px;
+  background: #f0f0f0;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.chat-footer button {
+  background-color: #f65595;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.receiver-thinking {
+  background-image: linear-gradient(-20deg, #fadef1 0%, #f895ca 100%);
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: fit-content;
+  color: #444;
+  position: relative;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.receiver-msg {
+  align-self: flex-start !important;
+  background-color: #fafbfd !important;
+  padding: 10px 15px;
+  border-radius: 10px 10px 10px 0;
+  max-width: 75%;
+  color: #111 !important;
+  font-size: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background-color: #fcabb8;
+  padding: 10px 15px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 75%;
+  font-size: 14px;
+  color: #111;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+.dots {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.dots span {
+  height: 6px;
+  width: 6px;
+  background-color: #444;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1s infinite ease-in-out;
+  margin: 0 2px;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-img {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.user-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #06c633;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.message-row.receiver {
+  justify-content: flex-start;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chat-wrapper {
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .chat-footer input {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .chat-footer button {
+    padding: 8px 10px;
+  }
+
+  .chat-header strong {
+    font-size: 16px;
+  }
+
+  .chat-header small {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .chat-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chat-footer input {
+    width: 100%;
+  }
+
+  .chat-footer button {
+    align-self: flex-end;
+  }
+}
+
+
+
+
+    /* Heart Animation Styles */
+    #hearts {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+ 
+    .heart {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #f95872;
+      transform: rotate(45deg);
+      animation: floatUp 7s linear infinite;
+      opacity: 0.8;
+    }
+ 
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #f95872;
+      border-radius: 50%;
+    }
+ 
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+ 
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+ 
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.chat-footer button {
+  background-color: #f65595;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.chat-footer {
+  display: flex;
+  /* padding: 10px 15px; */
+  padding: 10px;
+  background: #f0f0f0;
+  align-items: center;
+  gap: 10px;
+}
+
+.emoji-picker {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  background:white;
+  border: transparent 1px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 250px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 22px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 9999; 
+  pointer-events: auto;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 25px;
+}
+
+.emoji-picker span {
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+.emoji-picker span:hover {
+  transform: scale(1.2);
+}
+
+.hidden {
+  display: none;
+}
+
+.input-wrapper input[type="text"] {
+  width: 100%;
+  padding: 10px 15px 10px 140px; /* left padding for icons */
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.input-wrapper i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888;
+  cursor: pointer;
+}
+
+#emojiBtn {
+  left: 15px;
+}
+
+#cameraBtn {
+  left: 45px;
+}
+
+#recordBtn {
+  left: 75px;
+}
+</style>
+
+</head>
+
+<body>
+
+
+ <div class="chat-wrapper">
+    <!-- Sidebar -->
+   
+ 
+    <!-- Main Chat -->
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="user">
+  <div class="user-img">
+    <img src="https://randomuser.me/api/portraits/men/52.jpg" />
+    <span class="online-dot"></span>
+  </div>
+  <div>
+    <strong>Shreyu N</strong><br />
+    <small class="text-white">Online</small>
+  </div>
+
+
+  
+</div>
+ 
+        <div class="icons">
+          <i class="fas fa-phone me-3"   onclick="handleAudioClick()"></i>
+          <i class="fas fa-video me-3"   onclick="handleVedioClick()"></i>
+         
+        </div>
+      </div>
+     <div class="chat-body" id="chatBody"></div>
+        <!-- Receiver message example -->
+ 
+
+      </div>
+
+
+
+      <div class="chat-footer">
+
+
+<div class="input-wrapper">
+
+    <div id="emojiPicker" class="emoji-picker hidden">
+    <span>😀</span><span>😁</span><span>😂</span><span>🤣</span><span>😃</span><span>😄</span>
+    <span>😅</span><span>😆</span><span>😉</span><span>😊</span><span>😋</span><span>😎</span>
+    <span>😍</span><span>😘</span><span>😗</span><span>😙</span><span>😚</span><span>🙂</span>
+    <span>🤗</span><span>🤩</span><span>🤔</span><span>🤨</span><span>😐</span><span>😑</span>
+    <span>😶</span><span>🙄</span><span>😏</span><span>😣</span><span>😥</span><span>😮</span>
+    <span>🤐</span><span>😯</span><span>😪</span><span>😫</span><span>🥱</span><span>😴</span>
+    <span>😌</span><span>😛</span><span>😜</span><span>😝</span><span>🤤</span><span>😒</span>
+    <span>😓</span><span>😔</span><span>😕</span><span>🙃</span><span>🤑</span><span>😲</span>
+    <span>☹️</span><span>🙁</span><span>😖</span><span>😞</span><span>😟</span><span>😤</span>
+    <span>😢</span><span>😭</span><span>😦</span><span>😧</span><span>😨</span><span>😩</span>
+    <span>🤯</span><span>😬</span><span>😰</span><span>😱</span><span>🥵</span><span>🥶</span>
+    <span>😳</span><span>🤪</span><span>😵</span><span>🥴</span><span>😠</span><span>😡</span>
+    <span>🤬</span><span>😷</span><span>🤒</span><span>🤕</span><span>🤢</span><span>🤮</span>
+    <span>🥳</span><span>🥰</span><span>💩</span><span>👻</span><span>👽</span><span>😺</span>
+    <span>😸</span><span>😹</span><span>😻</span><span>😼</span><span>🙈</span><span>🙉</span>
+    <span>🙊</span><span>❤️</span><span>🧡</span><span>💛</span><span>💚</span><span>💙</span>
+    <span>💜</span><span>💰</span><span>💳</span><span>💎</span><span>🔧</span><span>🔨</span>
+
+</div>
+
+    <input type="text" id="chatInput" placeholder="Enter your text" />
+
+    <!-- Icons inside the input field -->
+    <i class="fas fa-smile" id="emojiBtn"></i>
+    <i class="fas fa-camera" id="cameraBtn"></i>
+    <i class="fas fa-microphone" id="recordBtn"></i>
+    <label for="pdfUpload"><i class="fas fa-paperclip"></i></label>
+    <input type="file" id="pdfUpload" accept="application/pdf" style="display: none;" />
+  </div>
+
+
+
+
+
+
+
+
+        <button><i class="fas fa-paper-plane"></i></button>
+         <div id="hearts"></div>
+      </div>
+    </div>
+ 
+   
+  </div>
+
+
+
+<!-- script -->
+ 
+<!-- Audio tag -->
+<audio id="msg-sound" src="images/pristine-609.ogg" preload="auto"></audio>
+ 
+<!-- script show subscription with XXX in code no.s -->
+
+
+
+
+<script>
+             // Emoji Button
+const emojiBtn = document.getElementById('emojiBtn');
+const emojiPicker = document.getElementById('emojiPicker');
+const chatInput = document.getElementById('chatInput');
+
+// Toggle emoji picker visibility
+emojiBtn.addEventListener('click', () => {
+  emojiPicker.classList.toggle('hidden');
+});
+
+// Add emoji to input when clicked
+emojiPicker.addEventListener('click', (e) => {
+  if (e.target.textContent.trim()) {
+    chatInput.value += e.target.textContent;
+    chatInput.focus();
+  }
+});
+
+// Close emoji picker on outside click
+document.addEventListener('click', (e) => {
+  if (!emojiPicker.contains(e.target) && !emojiBtn.contains(e.target)) {
+    emojiPicker.classList.add('hidden');
+  }
+});
+
+  // Camera Button
+  const cameraBtn = document.getElementById('cameraBtn');
+  const captureBtn = document.getElementById('captureBtn');
+  const cameraStream = document.getElementById('cameraStream');
+  const canvas = document.getElementById('photoCanvas');
+  const output = document.getElementById('output');
+
+  let stream;
+
+  // 📷 Open camera when icon is clicked
+  cameraBtn.addEventListener('click', async () => {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' } // Use 'user' for front camera
+      });
+      cameraStream.srcObject = stream;
+      cameraStream.style.display = 'block';
+      captureBtn.style.display = 'inline-block';
+    } catch (err) {
+      alert('Could not access the camera. Please allow camera permission.');
+    }
+  });
+
+  // 📸 Capture image
+  captureBtn.addEventListener('click', () => {
+    const context = canvas.getContext('2d');
+    canvas.width = cameraStream.videoWidth;
+    canvas.height = cameraStream.videoHeight;
+    context.drawImage(cameraStream, 0, 0, canvas.width, canvas.height);
+
+    // Stop the camera
+    stream.getTracks().forEach(track => track.stop());
+    cameraStream.style.display = 'none';
+    captureBtn.style.display = 'none';
+
+    // Convert canvas to image
+    const img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png');
+    img.style.maxWidth = '200px';
+    img.style.marginTop = '10px';
+    img.style.borderRadius = '8px';
+
+    output.appendChild(img);
+  });
+
+  // Voice Recorder Icon
+  // document.getElementById('micBtn').addEventListener('click', async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     const mediaRecorder = new MediaRecorder(stream);
+  //     const audioChunks = [];
+
+  //     mediaRecorder.ondataavailable = event => {
+  //       audioChunks.push(event.data);
+  //     };
+
+  //     mediaRecorder.onstop = () => {
+  //       const audioBlob = new Blob(audioChunks);
+  //       const audioUrl = URL.createObjectURL(audioBlob);
+  //       const audio = document.createElement("audio");
+  //       audio.controls = true;
+  //       audio.src = audioUrl;
+  //       document.getElementById("output").appendChild(audio);
+  //     };
+
+  //     mediaRecorder.start();
+  //     alert("Recording... Click OK to stop.");
+  //     setTimeout(() => mediaRecorder.stop(), 3000);
+  //   } catch (err) {
+  //     alert("Microphone access denied or not available.");
+  //   }
+  // });
+
+
+  document.getElementById('micBtn').addEventListener('click', async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      const audioChunks = [];
+
+      mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.src = audioUrl;
+        document.getElementById("output").appendChild(audio);
+
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      mediaRecorder.start();
+      alert("Recording started. It will stop in 3 seconds...");
+
+      setTimeout(() => {
+        mediaRecorder.stop();
+      }, 3000);
+
+    } catch (err) {
+      console.error("Mic error:", err);
+      alert("Microphone access denied or not available.");
+    }
+  });
+
+
+  // Attachment Button
+  const attachInput = document.getElementById('attachInput');
+  document.getElementById('attachBtn').addEventListener('click', () => {
+    attachInput.click();
+  });
+
+  attachInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const div = document.createElement("div");
+      div.textContent = `Attached: ${file.name}`;
+      document.getElementById("output").appendChild(div);
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  const input = document.querySelector('.chat-footer input');
+  const button = document.querySelector('.chat-footer button');
+  const chatBody = document.getElementById('chatBody');
+  const sound = document.getElementById('msg-sound');
+
+  function sendMessage() {
+    const originalMsg = input.value.trim();
+    if (originalMsg === '') return;
+
+    const digitCount = (originalMsg.match(/\d/g) || []).length;
+
+    let displayMsg = originalMsg;
+
+    if (digitCount > 2) {
+      displayMsg = originalMsg.replace(/\d/g, 'X');
+
+      Swal.fire({
+        title: 'Subscription Required',
+        text: "This feature is available only for subscribed users.",
+        icon: 'info',
+        confirmButtonColor: '#df314d',
+        confirmButtonText: 'Subscribe Now'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/ShyEyes/pricing-plan.html';
+        }
+      });
+    }
+
+    const userRow = document.createElement('div');
+    userRow.className = 'message-row user';
+    userRow.innerHTML = `
+      <div class="user-msg">${displayMsg}</div>
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-pic" />
+    `;
+    chatBody.appendChild(userRow);
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    const thinking = document.createElement('div');
+    thinking.className = 'receiver-thinking';
+    thinking.innerHTML = 'Shreyu is typing <span class="dots"><span></span><span></span><span></span></span>';
+    chatBody.appendChild(thinking);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    setTimeout(() => {
+      thinking.remove();
+
+      const receiverRow = document.createElement('div');
+      receiverRow.className = 'message-row receiver';
+      receiverRow.innerHTML = `
+        <img src="https://randomuser.me/api/portraits/men/52.jpg" class="profile-pic" />
+        <div class="receiver-msg">Hii</div> 
+      `;
+      chatBody.appendChild(receiverRow);
+      sound.play();
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 1500);
+  }
+
+  button.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+ <!-- audio -->
+ <script>
+  function handleAudioClick() {
+    Swal.fire({
+      title: 'Subscription Required',
+      text: "Audio feature is available only for subscribed users.",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '##df314d;',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Subscribe Now'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to subscription page
+        window.location.href = '/ShyEyes/pricing-plan.html';
+      }
+    });
+  }
+</script>
+
+
+
+<!-- vedio -->
+<script>
+  function handleVedioClick() {
+    Swal.fire({
+      title: 'Subscription Required',
+      text: "vedio feature is available only for subscribed users.",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '##df314d;',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Subscribe Now'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to subscription page
+        window.location.href = '/ShyEyes/pricing-plan.html';
+      }
+    });
+  }
+
+
+ // Floating hearts
+    const heartContainer = document.getElementById("hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.animationDuration = (Math.random() * 5 + 3) + "s";
+      heartContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 500);
+
+    
+</script>
+
+<!-- time script and required subscription script -->
+
+
+
+<script>
+  let timerInterval;
+  let timeLeft = 10; // 2 minutes in seconds
+
+  const chatHeader = document.querySelector('.chat-header');
+
+  // Create timer element and insert in center of chat header
+  const timerSpan = document.createElement('div');
+  timerSpan.id = 'chat-timer';
+  timerSpan.style.color = '#fff';
+  timerSpan.style.fontWeight = 'bold';
+  timerSpan.style.fontSize = '16px';
+  chatHeader.insertBefore(timerSpan, chatHeader.children[1]);
+
+  // Show 2-minute free alert on page load
+  window.addEventListener('load', function () {
+    Swal.fire({
+      title: 'Chat Free Only For 10 Second',
+      text: 'Enjoy your 10 second free chat now!',
+      icon: 'info',
+      confirmButtonColor: '#df314d',
+      confirmButtonText: 'Start Chat'
+    }).then(() => {
+      startTimer();
+    });
+  });
+
+  // Start countdown
+  function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      updateTimerDisplay();
+
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        showSubscriptionPopup();
+      }
+    }, 1000);
+  }
+
+  // Update timer in header
+  function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  // Show subscription popup when time ends
+  function showSubscriptionPopup() {
+    Swal.fire({
+      title: 'Free Time Over!',
+      text: 'Please subscribe to continue the chat.',
+      icon: 'warning',
+      confirmButtonColor: '#df314d',
+      confirmButtonText: 'Subscribe Now'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/ShyEyes/pricing-plan.html';
+      }
+    });
+  }
+</script>
+
+
+<!-- chat toggle script -->
+
+
+
+<!-- <script>
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const closeChatbot = document.getElementById('closeChatbot');
+
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWindow.style.display = 'flex';
+        chatbotToggle.style.display = 'none';
+    });
+
+    closeChatbot.addEventListener('click', () => {
+        chatbotWindow.style.display = 'none';
+        chatbotToggle.style.display = 'flex';
+    });
+</script> -->
+
+
+</body>
+</html>

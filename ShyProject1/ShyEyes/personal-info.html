@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Information</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .info-container {
+      background: #fff0f3;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .info-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #f95872;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1.5px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .gender-options {
+      display: flex;
+      gap: 15px;
+      margin-top: 8px;
+    }
+
+    .gender-options label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 400;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: linear-gradient(135deg, #f95872, #fd746c);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="info-container">
+    <h2>Personal Information / About</h2>
+    <form id="info-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" onchange="calculateAge()">
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="text" id="age" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <div class="gender-options">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Transgender"> Transgender</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" required>
+      </div>
+
+      <div class="form-group">
+        <label for="about">About</label>
+        <textarea id="about" rows="4" placeholder="Tell us about yourself..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Register</button>
+    </form>
+  </div>
+
+
+  <script type="module">
+    import { registerUser } from "./Service/userService.js";
+
+    window.addEventListener("DOMContentLoaded", function () {
+      const firstName = localStorage.getItem("firstName") || "";
+      const lastName = localStorage.getItem("lastName") || "";
+      if (firstName || lastName) {
+        document.getElementById("name").value = `${firstName} ${lastName}`.trim();
+      }
+    });
+
+    document.getElementById("info-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const dob = document.getElementById("dob").value;
+      const age = document.getElementById("age").value.trim();
+      const genderElement = document.querySelector('input[name="gender"]:checked');
+      const gender = genderElement ? genderElement.value : "";
+      const location = document.getElementById("location").value.trim();
+      const about = document.getElementById("about").value.trim();
+
+      const registerData = JSON.parse(localStorage.getItem("registerData") || "{}");
+
+      if (!dob || !age || !gender || !location || !about) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Hold on!',
+          text: 'Please fill all fields.',
+          confirmButtonColor: '#f95872'
+        });
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("firstName", registerData.firstName || "");
+      formData.append("lastName", registerData.lastName || "");
+      formData.append("email", registerData.email || "");
+      formData.append("password", registerData.password || "");
+      formData.append("phoneNo", registerData.phoneNo || "");
+      formData.append("dob", dob);
+      formData.append("age", age);
+      formData.append("gender", gender);
+      formData.append("street", location);
+      formData.append("bio", about);
+      formData.append("hobbies", registerData.hobbies || "");
+
+      const profilePhotos = JSON.parse(localStorage.getItem("profilePhotos") || "[]");
+      profilePhotos.forEach((photo, index) => {
+        const blob = dataURLtoBlob(photo);
+        formData.append("photos", blob, `profile_${index}.jpg`);
+      });
+
+      try {
+        const data = await registerUser(formData);
+        Swal.fire({
+          icon: 'success',
+          title: '🎉 You’re All Set!',
+          html: '<b>Welcome aboard!</b><br>Your profile has been created successfully.',
+          showConfirmButton: false,
+          didClose: () => {
+            window.location.href = "login.html";
+          }
+        });
+      } catch (error) {
+        Swal.fire({ icon: 'error', title: 'Oops...', text: error.message });
+      }
+
+    });
+
+
+    function dataURLtoBlob(dataurl) {
+      const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      while (n--) u8arr[n] = bstr.charCodeAt(n);
+      return new Blob([u8arr], { type: mime });
+    }
+  </script>
+
+
+  <dotlottie-wc class="bottom-left-lottie"
+    src="https://lottie.host/bb2e1cf4-809b-484d-a3e9-1defcba49af4/ti439wNbfk.lottie" speed="1" autoplay loop>
+  </dotlottie-wc>
+  <!-- end : left bottom  -->
+
+  <!-- start : right bottom  -->
+  <dotlottie-wc src="https://lottie.host/4afa7324-f055-4ae1-b3de-f2e84ede69d2/13WgK0RE6K.lottie" style="
+    width: 230px;
+    height: 230px;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    z-index: 9999;" speed="1" autoplay loop>
+  </dotlottie-wc>
+
+
+  <script>
+    function calculateAge() {
+      let dob = document.getElementById("dob").value;
+      if (dob) {
+        let today = new Date();
+        let birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let monthDiff = today.getMonth() - birthDate.getMonth();
+
+        // Agar birthday abhi nahi aaya to age -1
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+
+        document.getElementById("age").value = age;
+      }
+    }
+  </script>
+
+  <script>
+
+  </script>
+  //on submit, save the data to dob
+  <script>
+
+  </script>
+
+
+  <script>
+    // Get the profile photos from localStorage
+    // const profilePhotos = JSON.parse(localStorage.getItem("profilePhotos")) || [];
+  </script>
+
+</body>
+
+</html>

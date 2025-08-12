@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Global Projects</title>
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+  <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon" />
+
+
+<style>
+    /* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-left {
+  flex: 1;
+  padding: 40px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fcf3f9;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 40px;
+}
+
+.login-left h2 {
+  font-size: 20px;
+  color: #e1419c;
+  margin-bottom: 10px;
+}
+
+.login-left p {
+  margin-bottom: 30px;
+  color: #7a7a7a;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="password"] {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+/* 💡 Highlight inputs with pink border on focus */
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+  border: 1px solid #e91e63;
+  outline: none;
+  /* box-shadow: 0 0 5px rgba(233, 30, 99, 0.4); */
+}
+
+
+.password-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password-wrap .forgot {
+  font-size: 13px;
+  color: #346ebf;
+  text-decoration: none;
+}
+
+.remember-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-wrap input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background-image: linear-gradient(to right, #f769cc 0%, #ff63b9 100%);
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Right section */
+
+.login-right {
+  flex: 1.2;
+  position: relative;
+  background: url('/ShyEyes/assets/images/page1.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.login-right .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(107, 106, 106, 0.5); /* 🔥 This is the dark overlay */
+  z-index: 1;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2; /* Makes sure text appears above the overlay */
+  padding: 40px;
+  color: white;
+  max-width: 400px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.overlay-content h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.overlay-content p {
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.overlay-content span {
+  font-size: 14px;
+  display: block;
+  opacity: 0.9;
+}
+
+
+/* terms and condition style */
+
+.terms-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+
+.terms-content {
+  background: #ffffff;
+  padding: 30px 40px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.terms-content h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 28px;
+  color: #f63997;
+}
+
+.terms-content p,
+.terms-content ol {
+  font-size: 16px;
+  color: #2d2d2d;
+  line-height: 1.6;
+    margin-bottom: 20px; 
+}
+
+.terms-content ol {
+  margin-left: 40px;    /* Increased from 20px */
+  padding-left: 20px;   /* Increased from 10px */
+}
+
+.terms-content ol li {
+  margin-bottom: 12px;  /* Adds spacing between each list item */
+}
+
+
+.terms-content input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+.terms-content label {
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+}
+
+#proceedBtn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #fba7ec;
+  color: white;
+  
+  border: none;
+  border-radius: 8px;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+#proceedBtn.enabled {
+  opacity: 1;
+  cursor: pointer;
+ 
+  background-color: #e766a9;
+}
+
+/* Optional: Customize scrollbar */
+.terms-content::-webkit-scrollbar {
+  width: 8px;
+}
+.terms-content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.terms-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+</style>
+
+
+
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-left">
+      <img src="/ShyEyes/assets/logo/shylogo.png" alt="Global Projects Logo" class="logo" />
+      <h2>User Login</h2>
+      <p>Enter your User Id and password to access account.</p>
+      <form>
+        <label>User ID</label>
+        <!-- <input type="text" placeholder="Enter your User ID" required /> -->
+         <input type="text" id="email" name="email" placeholder="Enter your User ID" required />
+
+        <!-- <label>Employee ID</label>
+        <input type="text" placeholder="Enter your Employee ID" required /> -->
+
+        <div class="password-wrap">
+          <label>Password</label>
+          <a href="#" class="forgot">Forgot your password?</a>
+        </div>
+        <!-- <input type="password" placeholder="Enter your password" required /> -->
+         <input type="password" id="password" name="password" placeholder="Enter your password" required />
+
+        <div class="remember-wrap">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember me</label>
+        </div>
+
+       <button type="submit" class="login-btn" onclick="redirectToChat(event)">🔐 Log In</button>
+
+      </form>
+    </div>
+
+   <div class="login-right">
+  <div class="overlay"></div> <!-- 🔥 Overlay added -->
+  <div class="overlay-content">
+   <h1>Love Starts with a Login</h1>
+    <p>“Just one click... and I’m closer to finding my perfect match.”</p>
+    <span>– Happy User</span>
+  </div>
+</div>
+
+  </div>
+
+
+
+
+
+
+<!-- Terms & Conditions Modal -->
+<div id="termsModal" class="terms-modal">
+  <div class="terms-content">
+    <h2>Terms and Conditions</h2>
+  <p>By registering and using our dating platform, you agree to abide by the following terms and conditions to ensure a respectful, safe, and enjoyable experience for all users:</p>
+
+<ol>
+  <li>Respect all users and communicate politely. Harassment, hate speech, or abusive behavior will not be tolerated.</li>
+  <li>Do not share any personal contact information (like phone number, email, address) publicly or in chats unless you feel safe to do so.</li>
+  <li>Upload only genuine and appropriate profile pictures. Fake, offensive, or misleading photos are strictly prohibited.</li>
+  <li>All user profiles are subject to moderation. Any suspicious or inappropriate content may lead to suspension or removal.</li>
+  <li>Impersonation of others, using fake identities, or catfishing is a serious violation and may result in a permanent ban.</li>
+  <li>Respect other users’ privacy. Do not take screenshots or share chat details without consent.</li>
+  <li>Do not use the platform for any illegal activities, solicitation, or commercial purposes without permission.</li>
+  <li>You are responsible for keeping your account details and login credentials confidential.</li>
+  <li>Report any suspicious or harmful behavior immediately using the in-app report feature or by contacting support.</li>
+  <li>By using this app, you confirm that you are at least 18 years of age and understand the nature of a dating service.</li>
+</ol>
+
+<p>Your safety is our priority. We strive to create a secure environment where meaningful connections can grow. By continuing, you accept and agree to these conditions.</p>
+
+      <input type="checkbox" id="agreeCheckbox" />
+      <label for="agreeCheckbox">I have read and agree to the Terms and Conditions</label>
+    </p>
+    <button id="proceedBtn" disabled>Proceed to Login</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const agreeCheckbox = document.getElementById("agreeCheckbox");
+    const proceedBtn = document.getElementById("proceedBtn");
+    const modal = document.getElementById("termsModal");
+
+    // Enable button when checkbox is checked
+    agreeCheckbox.addEventListener("change", function () {
+      if (this.checked) {
+        proceedBtn.disabled = false;
+        proceedBtn.classList.add("enabled");
+      } else {
+        proceedBtn.disabled = true;
+        proceedBtn.classList.remove("enabled");
+      }
+    });
+
+    // Hide modal on proceed
+    proceedBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+  });
+</script>
+
+
+<script>
+  function redirectToChat(event) {
+    event.preventDefault(); // Form submit hone se rokta hai (agar form tag ke andar ho)
+    
+    // You can add your login validation here if needed
+    // After successful login:
+    window.location.href = "/ShyEyes/Agent-pages/agent-chat.html";  // <-- yahan apne live chat page ka naam dalo
+  }
+</script>
+
+
+
+
+<!-- api for login agent -->
+ <script>
+  async function redirectToChat(event) {
+    event.preventDefault(); // Stop form from submitting normally
+
+    const email = document.querySelector('input[type="text"]').value.trim();
+    const password = document.querySelector('input[type="password"]').value;
+
+    try {
+      const response = await fetch('https://datingwebsite-tkgx.onrender.com/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Login successful!');
+        // Optionally store token if returned
+        // localStorage.setItem('token', result.token);
+        window.location.href = '/ShyEyes/Agent-pages/agent-chat.html'; // Redirect after success
+      } else {
+        alert(result.message || 'Invalid credentials');
+      }
+
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('Server error or network issue. Please try again later.');
+    }
+  }
+</script>
+
+ <!-- api for login agent -->
+
+
+
+</body>
+</html>
