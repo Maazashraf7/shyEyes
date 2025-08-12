@@ -1,8 +1,8 @@
 // userService.js
-// const API_BASE_URL = "http://localhost:5000/api/auth";
-const API_BASE_URL = window.location.hostname === "localhost"
-  ? "http://localhost:5000/api/auth"
-  : "https://yourdomain.com/api/auth";
+const API_BASE_URL = "http://localhost:5000/api/auth";
+//const API_BASE_URL = window.location.hostname === "localhost"
+//  ? "http://localhost:5000/api/auth"
+  //: "https://api/auth";
 
 function getAuthHeaders() {
   const token = localStorage.getItem("token");
